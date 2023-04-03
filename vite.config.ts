@@ -4,67 +4,77 @@ import { defineConfig } from 'vite'
 
 import Vue from '@vitejs/plugin-vue'
 import scss from 'rollup-plugin-scss'
-
+import checker from 'vite-plugin-checker'
 
 const appDirectory = realpathSync(process.cwd())
 const resolveApp = (relative: string) => resolve(appDirectory, relative)
 const root = resolve(__dirname, resolveApp('src'))
 
 export default defineConfig({
-    // If our .vue files have a style, it will be compiled as a single `.css` file under /dist.
-    plugins: [
-      Vue({
-        include: [/\.vue$/, /\.md$/],
-        template: {
-          compilerOptions: {
-            // Customizing the output of the compiled template
-            // to remove whitespace around the template tags
-            whitespace: 'condense'
-          }
-        },
-      }),
-      scss({
-        fileName: 'bundle.css',
-        // Process resulting CSS
-        processor: (css, map) => ({
-          css: css.replace('/*date*/', '/* ' + new Date().toJSON() + ' */'),
-          map
-        }),
-        sourceMap: true,
-      }),
-    ],
-  
-    build: {
-      // Output compiled files to /dist.
-      outDir: './dist',
-      lib: {
-        // Set the entry point (file that contains our components exported).
-        entry: resolve(__dirname, 'src/main.ts'),
-        // Name of the library.
-        name: 'fabric-vue-image-editor',
-        // We are building for CJS and ESM, use a function to rename automatically files.
-        // Example: my-component-library.esm.js
-        fileName: (format) => `${'fabric-vue-image-editor'}.${format}.js`,
-      },
-      rollupOptions: {
-        // Vue is provided by the parent project, don't compile Vue source-code inside our library.
-        external: ['vue'],
-        output: { 
-          globals: { 
-            vue: 'Vue' 
-          },
+  // If our .vue files have a style, it will be compiled as a single `.css` file under /dist.
+  plugins: [
+    Vue({
+      include: [/\.vue$/, /\.md$/],
+      template: {
+        compilerOptions: {
+          // Customizing the output of the compiled template
+          // to remove whitespace around the template tags
+          whitespace: 'condense',
         },
       },
+    }),
+    scss({
+      fileName: 'bundle.css',
+      // Process resulting CSS
+      processor: (css, map) => ({
+        css: css.replace('/*date*/', '/* ' + new Date().toJSON() + ' */'),
+        map,
+      }),
+      sourceMap: true,
+    }),
+    checker({
+      overlay: {
+        initialIsOpen: false,
+      },
+      typescript: true,
+      eslint: {
+        lintCommand: 
+          'eslint "{src,config}/**/*.{vue,js,ts}" --cache --max-warnings=0'
+      }
+    })
+  ],
+
+  build: {
+    // Output compiled files to /dist.
+    outDir: './dist',
+    lib: {
+      // Set the entry point (file that contains our components exported).
+      entry: resolve(__dirname, 'src/main.ts'),
+      // Name of the library.
+      name: 'fabric-vue-image-editor',
+      // We are building for CJS and ESM, use a function to rename automatically files.
+      // Example: my-component-library.esm.js
+      fileName: format => `${'fabric-vue-image-editor'}.${format}.js`,
     },
-    optimizeDeps: {
-      include: ['vue'],
-    },
-    resolve: {
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
-      dedupe: ['vue'],
-      alias: {
-        '@/': `${root}/`,
-        '@image-editor': `${root}/common/image-editor/`,
+    rollupOptions: {
+      // Vue is provided by the parent project, don't compile Vue source-code inside our library.
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue',
+        },
       },
     },
-  })
+  },
+  optimizeDeps: {
+    include: ['vue'],
+  },
+  resolve: {
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+    dedupe: ['vue'],
+    alias: {
+      '@/': `${root}/`,
+      '@image-editor': `${root}/common/image-editor/`,
+    },
+  },
+})
