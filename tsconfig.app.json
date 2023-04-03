@@ -1,0 +1,30 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.web.json",
+    "include": [
+      "sandbox/*",
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue",
+      "src/*.ts",
+      "tests/**/*.ts",
+      "tests/**/*.tsx",
+      "index.d.ts",
+      "env.d.ts"
+    ],
+    "exclude": ["src/**/__tests__/*", "src/**/*.cy.ts"],
+    "compilerOptions": {
+      "importHelpers": true,
+      "composite": true,
+      "skipLibCheck": true,
+      "baseUrl": "./",
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      },
+    }
+}
