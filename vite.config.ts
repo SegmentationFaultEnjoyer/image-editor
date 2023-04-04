@@ -88,7 +88,6 @@ export default defineConfig({
     dedupe: ['vue'],
     alias: {
       '@/': `${root}/`,
-      '@image-editor': `${root}/common/image-editor/`,
     },
   },
 })
