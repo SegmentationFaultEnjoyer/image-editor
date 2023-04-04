@@ -1,5 +1,9 @@
 
 [![npm](https://img.shields.io/npm/v/simple-fabric-vue-image-editor)](https://www.npmjs.com/package/simple-fabric-vue-image-editor)
+[![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)](https://www.typescriptlang.org/)
+[![vue](https://img.shields.io/badge/-Vue.js-4fc08d?style=flat&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
+[![fabric](https://img.shields.io/npm/v/fabric?label=fabric.js)](https://www.npmjs.com/package/fabric)
+
 # Image Editor
 
 A brief description of what the library is and what it does.
