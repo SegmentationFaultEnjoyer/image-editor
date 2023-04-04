@@ -1,6 +1,6 @@
 {
   "name": "simple-fabric-vue-image-editor",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "repository": "git@github.com:SegmentationFaultEnjoyer/image-editor.git",
   "author": "Mark <mwoyshvillo@gmail.com>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "dev": "vite",
     "build": "yarn lint && rm -rf dist && vite build && npm run build:types",
     "publish-package": "npm pack && npm publish && rm -rf *.tgz",
-    "build:types": "vue-tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir ./dist/types",
+    "build:types": "vue-tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir ./dist/types && tsc-alias -p tsconfig.types.json --outDir ./dist/types",
     "typecheck": "vue-tsc -p tsconfig.types.json --noEmit",
     "lint": "eslint \"{src,config}/**/*.{vue,js,ts}\" --cache --fix --max-warnings=0"
   },
