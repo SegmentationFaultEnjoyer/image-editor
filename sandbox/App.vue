@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ImageEditor } from '@/components'
-const title = 'Welcome to your your sandbox environment'
+const title = 'Purchasing'
 </script>
 
 <style lang="scss" scoped>
@@ -36,8 +36,9 @@ const title = 'Welcome to your your sandbox environment'
 }
 
 .sandbox__content {
-  background-color: var(--lib-background-tertiary);
+  background-color: var(--lib-background-quaternary);
   width: 70%;
+  font-weight: 700;
   padding: toRem(25);
 }
 </style>

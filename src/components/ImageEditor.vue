@@ -74,15 +74,14 @@ onMounted(async () => {
 .image-editor {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: toRem(20) 0;
   gap: toRem(20);
-  border: toRem(1) solid var(--primary-main);
+  border: toRem(1) solid var(--lib-primary-main);
 
-  @include respond-to(medium) {
-    flex-direction: column-reverse;
-  }
+  // @include respond-to(medium) {
+  //   flex-direction: column-reverse;
+  // }
 }
 
 .image-editor__canvas-wrapper {
@@ -94,7 +93,7 @@ onMounted(async () => {
   overflow-y: auto;
   min-height: toRem(700);
   padding: toRem(40);
-  background-color: var(--primary-light);
+  background-color: var(--lib-editor-background);
   position: static;
 
   &--hidden {
@@ -109,6 +108,6 @@ onMounted(async () => {
 }
 
 .image-editor__canvas {
-  border: toRem(1) dashed rgba(0, 0, 0, 0.2);
+  border: toRem(2) dashed green;
 }
 </style>

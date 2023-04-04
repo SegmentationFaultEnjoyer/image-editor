@@ -1,208 +1,121 @@
-@font-face {
+/* @font-face {
   font-family: 'Roboto';
   src: local('Roboto'), url('./Roboto/Roboto-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 @font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-BoldItalic.ttf') format('truetype');
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Jakarta Sans Bold Italic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
+  font-stretch: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-BlackItalic.ttf') format('truetype');
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Bold.ttf') format('truetype');
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-stretch: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-BoldItalic.ttf') format('truetype');
-  font-weight: 700;
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans ExtraBold Italic.woff2') format('woff2');
+  font-weight: 800;
   font-style: italic;
-  font-display: swap;
+  font-stretch: normal;
 }
 
 @font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-Black.ttf') format('truetype');
-  font-weight: 900;
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans ExtraBold.woff2') format('woff2');
+  font-weight: 800;
   font-style: normal;
-  font-display: swap;
+  font-stretch: normal;
 }
 
 @font-face {
-  font-family: 'Gilroy';
-  src: local('Gilroy'), url('./Gilroy/Gilroy-BlackItalic.ttf') format('truetype');
-  font-weight: 900;
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans ExtraLight Italic.woff2') format('woff2');
+  font-weight: 250;
   font-style: italic;
-  font-display: swap;
+  font-stretch: normal;
 }
 
 @font-face {
-  font-family: 'Metropolis';
-  src: local('Gilroy'), url('./Metropolis/Metropolis-Medium.ttf') format('truetype');
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans ExtraLight.woff2') format('woff2');
+  font-weight: 250;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Light Italic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Medium Italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-stretch: normal;
 }
 
 @font-face {
-  font-family: 'Metropolis';
-  src: local('Gilroy'), url('./Metropolis/Metropolis-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
 }
 
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans SemiBold Italic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family:'Jakarta';
+  src: local('Jakarta'), url('./PlusJakarta/Plus Jakarta Sans SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}

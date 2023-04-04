@@ -5,8 +5,8 @@ $lib-black-rgb: hexToRGB($lib-black);
 
 $lib-background-primary: #ffffff;
 $lib-background-secondary: #232323;
-$lib-background-tertiary: #fafafa;
-$lib-background-quaternary: #313131;
+$lib-background-tertiary: #E4EAF3;
+$lib-background-quaternary: #383838;
 $lib-background-quinary: #111010;
 $lib-background-quinary-rgb: hexToRGB($lib-background-quinary);
 
@@ -67,9 +67,12 @@ $lib-text-guides: #3BA2B1;
 /* border colors */
 
 $lib-border-primary-light: #feffff;
-$lib-border-primary-main: #cbdae9;
-$lib-border-primary-dark: #9aa9b7;
+$lib-border-primary-main: #545656;
+$lib-border-primary-dark: #A9A9A9;
 $lib-border-secondary-light: #e4e7e7;
 $lib-border-secondary-main: #e4e7e7;
 $lib-border-secondary-dark: #978d8d;
 $lib-border-black: #3E3E3E;
+
+/* other colors */
+$lib-editor-background: #292929

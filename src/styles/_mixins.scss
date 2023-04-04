@@ -74,3 +74,10 @@ $media-breakpoints: (
   transition-property: opacity, color, font-size, transform;
   margin-top: toRem(4);
 }
+
+@mixin lib-tool-label {
+  font-weight: 400;
+  font-size: toRem(14);
+  line-height: 120%;
+  color: var(--lib-border-primary-dark);
+}

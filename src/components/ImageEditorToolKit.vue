@@ -1,5 +1,8 @@
 <template>
   <aside class="image-editor-tool-kit">
+    <tools-switcher v-model="currentMode" />
+    <hr class="image-editor-tool-kit__divider" />
+    <layering-tool />
     <!-- HERE WILL BE THE LIST OF COMPONENTS 
             THAT WILL REPRESENT EACH TOOL IN EDITOR-->
 
@@ -23,12 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 
 // import { ContextMenu } from '@/common'
 
 import { EditorInstanceKey } from '@/types'
+import { ToolsSwitcher, LayeringTool } from '@/components'
 import { safeInject } from '@/helpers'
+import { TOOL_MODS } from '@/enums'
+
+const currentMode = ref<TOOL_MODS>(TOOL_MODS.text)
 
 const {
   instance: { unmountCleanUp },
@@ -43,13 +50,23 @@ onBeforeUnmount(() => {
 .image-editor-tool-kit {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  gap: toRem(15);
+  width: 40%;
+  padding: toRem(20);
+  border: 1px solid black;
 
-  @include respond-to(medium) {
-    justify-content: center;
-    align-items: center;
-    flex-flow: row wrap;
-  }
+  // @include respond-to(medium) {
+  //   justify-content: center;
+  //   align-items: center;
+  //   flex-flow: row wrap;
+  // }
+}
+
+.image-editor-tool-kit__divider {
+  background-color: var(--lib-border-primary-main);
+  height: toRem(1);
+  width: 100%;
+  border: none;
 }
 
 .image-editor-tool-kit__context-menu {

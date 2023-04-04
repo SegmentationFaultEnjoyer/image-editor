@@ -75,8 +75,7 @@
 
   /* App variables */
   --lib-app-txt: #{$lib-text-primary-main};
-  --lib-app-font-family: 'Gilroy', sans-serif;
-  --lib-app-font-family-secondary: 'Metropolis';
+  --lib-app-font-family: 'Jakarta', sans-serif;
   --lib-app-padding-right: #{toRem(100)};
   --lib-app-padding-left: #{toRem(100)};
 
@@ -135,4 +134,7 @@
     var(--lib-field-padding-left);
 
   --lib-field-error: var(--lib-error-main);
+
+  /* other variables */
+  --lib-editor-background: #{$lib-editor-background};
 }

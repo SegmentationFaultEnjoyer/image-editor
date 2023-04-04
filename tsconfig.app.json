@@ -27,7 +27,8 @@
       "paths": {
         "@/*": [
           "./src/*"
-        ]
+        ],
+        "@static": ["static"],
       },
       "lib": [
         "esnext",

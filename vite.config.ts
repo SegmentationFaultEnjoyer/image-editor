@@ -88,6 +88,7 @@ export default defineConfig({
     dedupe: ['vue'],
     alias: {
       '@/': `${root}/`,
+      '@static': `${root}/../static`,
     },
   },
 })
