@@ -7,11 +7,11 @@ A brief description of what the library is and what it does.
 To install the library, run the following command:
 
 ```
-npm install fabric-vue-image-editor
+npm install simple-fabric-vue-image-editor
 
 # or
 
-yarn add fabric-vue-image-editor
+yarn add simple-fabric-vue-image-editor
 ```
 
 
