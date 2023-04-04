@@ -1,9 +1,5 @@
 <template>
-  <button
-    v-bind="$attrs"
-    :class="buttonClasses"
-    :type="$attrs.type || 'button'"
-  >
+  <button v-bind="$attrs" :class="buttonClasses" :type="type">
     <icon class="editor-button__icon" :name="iconName" />
   </button>
 </template>
@@ -15,17 +11,20 @@ import { ICON_NAMES } from '@/enums'
 
 type Size = 'small' | 'x-medium' | 'medium' | 'large'
 type Modification = 'first-in-group' | 'last-in-group' | 'default'
+type ButtonType = 'submit' | 'reset' | 'button'
 
 const props = withDefaults(
   defineProps<{
     iconName?: ICON_NAMES
     size?: Size
     modifications?: Modification
+    type?: ButtonType
   }>(),
   {
     iconName: ICON_NAMES.text,
     size: 'medium',
     modifications: 'default',
+    type: 'button',
   },
 )
 
