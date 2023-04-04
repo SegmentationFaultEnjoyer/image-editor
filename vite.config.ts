@@ -13,6 +13,7 @@ const root = resolve(__dirname, resolveApp('src'))
 
 export default defineConfig({
   // If our .vue files have a style, it will be compiled as a single `.css` file under /dist.
+  publicDir: 'static',
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/],

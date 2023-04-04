@@ -3,7 +3,8 @@
     "include": [
       "sandbox/*",
       "src/**/*.ts",
-      "src/**/*.tsx",
+      "src/**/*.tsx", 
+      "src/**/*.json",
       "src/**/*.vue",
       "src/*.ts",
       "tests/**/*.ts",
@@ -19,7 +20,6 @@
       "baseUrl": "./",
       "allowJs": true,
       "resolveJsonModule": true,
-      "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
       "types": [
         "vite/client",
@@ -29,5 +29,11 @@
           "./src/*"
         ]
       },
+      "lib": [
+        "esnext",
+        "dom",
+        "dom.iterable",
+        "scripthost",
+      ],
     }
 }

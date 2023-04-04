@@ -5,11 +5,6 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  settings: {
-    'vue-i18n': {
-      localeDir: 'src/localization/**/*.(json|json5)',
-    },
-  },
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -21,7 +16,6 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     '@vue/typescript/recommended',
     '@vue/eslint-config-typescript/recommended',
-    'plugin:vue-i18n/recommended',
     '@vue/prettier',
     '@vue/eslint-config-prettier',
   ],
@@ -46,21 +40,6 @@ module.exports = {
         bracketSpacing: true,
         bracketSameLine: false,
         arrowParens: 'avoid',
-      },
-    ],
-    'vue-i18n/no-v-html': 'off',
-    'vue-i18n/no-dynamic-keys': 'warn',
-    'vue-i18n/no-missing-keys': 'warn',
-    'vue-i18n/no-unused-keys': [
-      'error',
-      {
-        extensions: ['.js', '.ts', '.vue'],
-      },
-    ],
-    'vue-i18n/no-raw-text': [
-      'error',
-      {
-        ignoreText: ['—', '|', '×'],
       },
     ],
     'arrow-parens': 0,
