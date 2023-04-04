@@ -1,11 +1,11 @@
 import { resolve } from 'node:path'
 import { realpathSync } from 'node:fs'
 import { defineConfig } from 'vite'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 import Vue from '@vitejs/plugin-vue'
 import scss from 'rollup-plugin-scss'
 import checker from 'vite-plugin-checker'
+import svgLoader from 'vite-svg-loader';
 
 const appDirectory = realpathSync(process.cwd())
 const resolveApp = (relative: string) => resolve(appDirectory, relative)
@@ -15,6 +15,12 @@ export default defineConfig({
   // If our .vue files have a style, it will be compiled as a single `.css` file under /dist.
   publicDir: 'static',
   plugins: [
+    svgLoader({
+      defaultImport: 'component',
+      svgoConfig: {
+        path: resolve(process.cwd(), 'src/assets/icons')
+      }
+    }),
     Vue({
       include: [/\.vue$/, /\.md$/],
       template: {
@@ -24,10 +30,6 @@ export default defineConfig({
           whitespace: 'condense',
         },
       },
-    }),
-    createSvgIconsPlugin({
-      iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
-      symbolId: '[name]',
     }),
     scss({
       fileName: 'bundle.css',

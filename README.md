@@ -43,10 +43,6 @@ also you need to import styles if you want to use Vue components
 ```javascript
 import 'simple-fabric-vue-image-editor/dist/fabric-vue-image-editor-ts.css'
 ```
-Add this only if you don't have this import already in your project
-```javascript
-import 'virtual:svg-icons-register'
-```
 
 <b>Creating own editor example</b>:
 

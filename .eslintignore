@@ -8,3 +8,4 @@ index.html
 static/env.js
 vite.config.ts
 env.d.ts
+src/assets/icons

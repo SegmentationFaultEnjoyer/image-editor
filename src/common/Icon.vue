@@ -1,23 +1,26 @@
 <template>
-  <svg class="icon" aria-hidden="true">
-    <use :href="`#${name}-icon`" />
-  </svg>
+  <component class="new-icon" :is="icon" />
 </template>
 
 <script setup lang="ts">
 import type { ICON_NAMES } from '@/enums'
+import { defineAsyncComponent, computed } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   name: ICON_NAMES
 }>()
+
+const icon = computed(() =>
+  defineAsyncComponent(() => import(`@/assets/icons/${props.name}-icon.svg`)),
+)
 </script>
 
-<style lang="scss" scoped>
-.icon {
+<style scoped lang="scss">
+.new-icon {
   display: grid;
   place-items: center;
   pointer-events: none;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>
