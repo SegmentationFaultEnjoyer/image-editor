@@ -1,3 +1,5 @@
+
+[![npm](https://img.shields.io/npm/v/simple-fabric-vue-image-editor)](https://www.npmjs.com/package/simple-fabric-vue-image-editor)
 # Image Editor
 
 A brief description of what the library is and what it does.
