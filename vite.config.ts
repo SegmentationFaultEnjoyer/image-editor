@@ -1,6 +1,7 @@
 import { resolve } from 'node:path'
 import { realpathSync } from 'node:fs'
 import { defineConfig } from 'vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 import Vue from '@vitejs/plugin-vue'
 import scss from 'rollup-plugin-scss'
@@ -23,6 +24,10 @@ export default defineConfig({
         },
       },
     }),
+    createSvgIconsPlugin({
+      iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: '[name]',
+    }),
     scss({
       fileName: 'bundle.css',
       // Process resulting CSS
@@ -30,7 +35,6 @@ export default defineConfig({
         css: css.replace('/*date*/', '/* ' + new Date().toJSON() + ' */'),
         map,
       }),
-      sourceMap: true,
     }),
     checker({
       overlay: {
@@ -43,7 +47,16 @@ export default defineConfig({
       }
     })
   ],
-
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "@/styles/_functions.scss";
+          @import "@/styles/_mixins.scss";
+        `,
+      }
+    }
+  },
   build: {
     // Output compiled files to /dist.
     outDir: './dist',

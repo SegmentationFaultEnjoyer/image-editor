@@ -1,0 +1,145 @@
+@import '../../static/branding/app-colors';
+
+:root,
+:before,
+:after {
+  --lib-white: #{$lib-white};
+  --lib-white-rgb: #{$lib-white-rgb};
+  --lib-black: #{$lib-black};
+  --lib-black-rgb: #{$lib-black-rgb};
+
+  --lib-background-primary: #{$lib-background-primary};
+  --lib-background-secondary: #{$lib-background-secondary};
+  --lib-background-tertiary: #{$lib-background-tertiary};
+  --lib-background-quaternary: #{$lib-background-quaternary};
+  --lib-background-quinary: #{$lib-background-quinary};
+  --lib-background-quinary-rgb: #{$lib-background-quinary-rgb};
+  --lib-background-error: #{$lib-background-error};
+  --lib-background-success: #{$lib-background-success};
+  --lib-background-switcher: #{$lib-background-switcher};
+  --lib-background-switcher-picked: #{$lib-background-switcher-picked};
+  --lib-background-switcher-picked-rgb: #{$lib-background-switcher-picked-rgb};
+
+  /* status colors */
+  --lib-success-light: #{$lib-success-light};
+  --lib-success-main: #{$lib-success-main};
+  --lib-success-dark: #{$lib-success-dark};
+
+  --lib-error-light: #{$lib-error-light};
+  --lib-error-main: #{$lib-error-main};
+  --lib-error-dark: #{$lib-error-dark};
+
+  --lib-warning-light: #{$lib-warning-light};
+  --lib-warning-main: #{$lib-warning-main};
+  --lib-warning-dark: #{$lib-warning-dark};
+
+  --lib-info-light: #{$lib-info-light};
+  --lib-info-main: #{$lib-info-main};
+  --lib-info-dark: #{$lib-info-dark};
+
+  /* brand colors */
+  --lib-primary-light: #{$lib-primary-light};
+  --lib-primary-main: #{$lib-primary-main};
+  --lib-primary-main-rgb: #{$lib-primary-main-rgb};
+  --lib-primary-dark: #{$lib-primary-dark};
+
+  /* typography colors */
+  --lib-text-primary-light: #{$lib-text-primary-light};
+  --lib-text-primary-main: #{$lib-text-primary-main};
+  --lib-text-primary-dark: #{$lib-text-primary-dark};
+
+  --lib-text-secondary-light: #{$lib-text-secondary-light};
+  --lib-text-secondary-main: #{$lib-text-secondary-main};
+  --lib-text-secondary-dark: #{$lib-text-secondary-dark};
+
+  --lib-text-primary-invert-light: #{$lib-text-primary-invert-light};
+  --lib-text-primary-invert-main: #{$lib-text-primary-invert-main};
+  --lib-text-primary-invert-dark: #{$lib-text-primary-invert-dark};
+
+  --lib-text-secondary-invert-light: #{$lib-text-secondary-invert-light};
+  --lib-text-secondary-invert-main: #{$lib-text-secondary-invert-main};
+  --lib-text-secondary-invert-dark: #{$lib-text-secondary-invert-dark};
+
+  --lib-text-success: #{$lib-text-success};
+  --lib-text-diclaimer: #{$lib-text-diclaimer};
+  --lib-text-guides: #{$lib-text-guides};
+
+  /* border colors */
+  --lib-border-primary-light: #{$lib-border-primary-light};
+  --lib-border-primary-main: #{$lib-border-primary-main};
+  --lib-border-primary-dark: #{$lib-border-primary-dark};
+  --lib-border-secondary-main: #{$lib-border-secondary-main};
+  --lib-border-secondary-dark: #{$lib-border-secondary-dark};
+  --lib-border-black: #{$lib-border-black};
+
+
+  /* App variables */
+  --lib-app-txt: #{$lib-text-primary-main};
+  --lib-app-font-family: 'Gilroy', sans-serif;
+  --lib-app-font-family-secondary: 'Metropolis';
+  --lib-app-padding-right: #{toRem(100)};
+  --lib-app-padding-left: #{toRem(100)};
+
+  // stylelint-disable max-line-length
+  --cover-image-shadow: #{drop-shadow(0 toRem(4) toRem(16) rgba(#9799a0, 0.25))};
+  --cover-image-shadow-small: #{drop-shadow(0 toRem(4) toRem(8) rgba(#9799a0, 0.25))};
+  // stylelint-enable max-line-length
+
+  @include respond-to(xmedium) {
+    --lib-app-padding-right: #{toRem(70)};
+    --lib-app-padding-left: #{toRem(70)};
+  }
+
+  @include respond-to(small) {
+    --lib-app-padding-right: #{toRem(24)};
+    --lib-app-padding-left: #{toRem(24)};
+  }
+
+  /* --------------------------------------- */
+
+  /* Field variables */
+
+  /* --------------------------------------- */
+  --lib-field-bg: var(--lib-background-primary);
+
+  /* label */
+  --lib-field-label: var(--lib-text-primary-main);
+  --lib-field-label-hover: var(--tlib-ext-primary-main);
+  --lib-field-label-focus: var(--lib-text-primary-main);
+  --lib-field-label-font-size: #{toRem(14)};
+  --lib-field-label-line-height: 1.4;
+
+  /* text */
+  --lib-field-text: var(--lib-text-primary-main);
+  --lib-field-text-font-size: #{toRem(14)};
+  --lib-field-text-line-height: 1.4;
+  --lib-field-placeholder: #{rgba($lib-text-primary-main, 0.35)};
+
+  /* border */
+  --lib-field-border: var(--lib-border-primary-main);
+  --lib-field-border-hover: var(--lib-primary-light);
+  --lib-field-border-focus: var(--lib-primary-light);
+
+  /* transition duration */
+  --lib-field-transition-duration: 0.2s;
+
+  /* paddings */
+  --lib-field-padding-top: #{toRem(12)};
+  --lib-field-padding-right: #{toRem(16)};
+  --lib-field-padding-bottom: #{toRem(12)};
+  --lib-field-padding-left: #{toRem(16)};
+  --lib-field-padding:
+    var(--lib-field-padding-top)
+    var(--lib-field-padding-right)
+    var(--lib-field-padding-bottom)
+    var(--lib-field-padding-left);
+
+  --lib-field-error: var(--lib-error-main);
+
+  /* z-indexes */
+  --z-index-layer-1: 1;
+  --z-index-layer-2: 2;
+  --z-index-layer-3: 3;
+  --z-index-layer-4: 4;
+  --z-index-layer-bottom: -1;
+}

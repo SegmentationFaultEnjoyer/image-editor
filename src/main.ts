@@ -1,10 +1,12 @@
+import '@/styles/app.scss'
+
 import type { App, Plugin } from 'vue'
-import { Input } from '@/components'
+import { SelectField } from '@/fields'
 
 export default {
   install: (app: App) => {
-    app.component('input-test', Input)
+    app.component('select-field', SelectField)
   },
 } as Plugin
 
-export { Input }
+export { SelectField }

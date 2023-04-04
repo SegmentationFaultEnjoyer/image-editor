@@ -1,0 +1,158 @@
+@use 'sass:map';
+
+$media-breakpoints: (
+  xsmall: 480px,
+  small: 600px,
+  tablet: 868px,
+  medium: 1024px,
+  xmedium: 1280px,
+  large: 1400px,
+  xlarge: 1920px,
+  xlarge2k: 2048px,
+  xlarge4k: 4096px,
+);
+
+@mixin respond-to ($media) {
+  $breakpoint: map.get($media-breakpoints, $media);
+
+  @if $breakpoint {
+    @media (max-width: ($breakpoint - 1)) {
+      @content;
+    }
+  }
+
+  @else {
+    @media (max-width: ($media - 1)) {
+      @content;
+    }
+  }
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin lib-field-text {
+  font-size: var(--lib-field-text-font-size);
+  line-height: var(--lib-field-text-line-height);
+  -webkit-text-fill-color: var(--lib-field-text-font-size);
+  color: var(--lib-field-text);
+  transition: color var(--lib-field-transition-duration) ease;
+}
+
+@mixin lib-field-label {
+  font-size: var(--lib-field-label-font-size);
+  line-height: var(--lib-field-label-line-height);
+  color: var(--lib-field-label);
+  transition: color var(--lib-field-transition-duration) ease;
+  margin-bottom: toRem(4);
+}
+
+@mixin lib-field-border {
+  border: toRem(1) solid var(--lib-field-border);
+  border-radius: toRem(4);
+}
+
+@mixin lib-field-placeholder {
+  @include lib-field-text;
+
+  color: var(--lib-field-placeholder);
+  -webkit-text-fill-color: var(--lib-field-placeholder);
+  fill: var(--lib-field-placeholder);
+  transition: color var(--lib-field-transition-duration) ease;
+  transition-property: opacity, color;
+}
+
+@mixin lib-field-error {
+  overflow: hidden;
+  color: var(--lib-field-error);
+  font-size: toRem(10);
+  line-height: 1.4;
+  transition: var(--lib-field-transition-duration) ease;
+  transition-property: opacity, color, font-size, transform;
+  margin-top: toRem(4);
+}
+
+@mixin guide-phrase {
+  line-height: 130%;
+
+  &--bold {
+    font-weight: 600;
+  }
+
+  &--italic {
+    font-style: italic;
+  }
+
+  &--color-dark {
+    color: var(--primary-dark);
+  }
+}
+
+@mixin guide-image {
+  background-size: contain;
+  margin: 0 auto;
+
+  &--x-small {
+    width: clamp(toRem(50), 35%, toRem(200));
+  }
+
+  &--small {
+    width: clamp(toRem(50), 60%, toRem(200));
+  }
+
+  &--medium {
+    width: clamp(toRem(200), 100%, toRem(500));
+  }
+}
+
+@mixin guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50%, toRem(400)));
+  gap: toRem(20);
+  max-width: toRem(800);
+
+  @include respond-to(small) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@mixin text-shadow {
+  --shadow-color: #{var(--text-primary-main)};
+
+  text-shadow: toRem(-1) toRem(1) 0 var(--shadow-color),
+    toRem(1) toRem(1) 0 var(--shadow-color),
+    toRem(1) toRem(-1) 0 var(--shadow-color),
+    toRem(-1) toRem(-1) 0 var(--shadow-color);
+
+  &--shadow-color-invert {
+    --shadow-color: #{var(--text-primary-invert-main)};
+  }
+}
+
+@mixin info-headline {
+  font-size: toRem(30);
+  line-height: toRem(40);
+  color: var(--text-secondary-dark);
+
+  @include respond-to(tablet) {
+    font-size: toRem(20);
+    line-height: 1.3;
+  }
+}
+
+@mixin subtitle-underline {
+  &:after {
+    display: block;
+    content: '';
+    height: toRem(2);
+    margin-top: toRem(10);
+    background: var(--primary-main);
+    margin-left: auto;
+    margin-right: auto;
+    width: clamp(#{toRem(155)}, 20%, #{toRem(215)});
+  }
+}

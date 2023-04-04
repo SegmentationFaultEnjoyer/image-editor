@@ -1,0 +1,87 @@
+$lib-white: #ffffff;
+$lib-white-rgb: hexToRGB($lib-white);
+$lib-black: #000000;
+$lib-black-rgb: hexToRGB($lib-black);
+
+$lib-background-primary: #ffffff;
+$lib-background-secondary: #232323;
+$lib-background-tertiary: #fafafa;
+$lib-background-quaternary: #313131;
+$lib-background-quinary: #111010;
+$lib-background-quinary-rgb: hexToRGB($lib-background-quinary);
+
+$lib-background-error: #ffedf3;
+$lib-background-success: #F2FFED;
+
+$lib-background-switcher: #F1F3F8;
+$lib-background-switcher-picked: #2dceff;
+$lib-background-switcher-picked-rgb: hexToRGB($lib-background-switcher-picked); 
+
+/* status colors */
+
+$lib-success-light: #5efc82;
+$lib-success-main: #00c853;
+$lib-success-dark: #009624;
+
+$lib-error-light: #EC7770;
+$lib-error-main: #DD3A31;
+$lib-error-dark: #A7302A;
+
+$lib-warning-light: #f16709;
+$lib-warning-main: #ff6d00;
+$lib-warning-dark: #c43c00;
+
+$lib-info-light: #82f7ff;
+$lib-info-main: #40c4ff;
+$lib-info-dark: #0094cc;
+
+/* brand colors */
+
+$lib-primary-light: #D7DADB;
+$lib-primary-main: #4cbecf;
+$lib-primary-main-rgb: hexToRGB($lib-primary-main);
+$lib-primary-dark: #3BA2B1;
+
+/* typography colors */
+
+$lib-text-primary-light: #717171;
+$lib-text-primary-main: #464646;
+$lib-text-primary-dark: #1f1f1f;
+
+$lib-text-secondary-light: #c8bdbd;
+$lib-text-secondary-main: #978d8d;
+$lib-text-secondary-dark: #262626;
+
+$lib-text-primary-invert-light: #ffffff;
+$lib-text-primary-invert-main: #ffffff;
+$lib-text-primary-invert-dark: #ffffff;
+
+$lib-text-secondary-invert-light: #ffffff;
+$lib-text-secondary-invert-main: #ffffff;
+$lib-text-secondary-invert-dark: #ffffff;
+
+$lib-text-success: #4E975A;
+$lib-text-diclaimer: #98D0F5;
+$lib-text-guides: #3BA2B1;
+
+/* border colors */
+
+$lib-border-primary-light: #feffff;
+$lib-border-primary-main: #cbdae9;
+$lib-border-primary-dark: #9aa9b7;
+$lib-border-secondary-light: #e4e7e7;
+$lib-border-secondary-main: #e4e7e7;
+$lib-border-secondary-dark: #978d8d;
+$lib-border-black: #3E3E3E;
+
+/* other colors */
+
+$network-purple-dark: #8247E5;
+$network-purple-light: #627EEA;
+$network-black: #0B2545;
+$network-green: #87FF65;
+$drop-down-shadow: #b6b6b7;
+$drop-down-shadow-rgb: hexToRGB($drop-down-shadow);
+$shadow-color: #96969d;
+$guide-card-color: #6B82B0;
+$guide-card-color-rgb: hexToRGB($guide-card-color);

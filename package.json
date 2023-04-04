@@ -1,6 +1,6 @@
 {
-  "name": "fabric-vue-image-editor",
-  "version": "0.0.16",
+  "name": "simple-fabric-vue-image-editor",
+  "version": "0.0.1",
   "repository": "git@github.com:SegmentationFaultEnjoyer/image-editor.git",
   "author": "Mark <mwoyshvillo@gmail.com>",
   "license": "MIT",
@@ -24,11 +24,11 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && vite build && npm run build:types",
+    "build": "yarn lint && rm -rf dist && vite build && npm run build:types",
     "publish-package": "npm pack && npm publish && rm -rf *.tgz",
     "build:types": "vue-tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir ./dist/types ",
     "typecheck": "vue-tsc -p tsconfig.types.json --noEmit",
-    "lint":  "eslint \"{src,config}/**/*.{vue,js,ts}\" --cache --fix --max-warnings=0"
+    "lint": "eslint \"{src,config}/**/*.{vue,js,ts}\" --cache --fix --max-warnings=0"
   },
   "devDependencies": {
     "@babel/types": "^7.21.4",
@@ -51,11 +51,14 @@
     "tsc-alias": "^1.8.5",
     "typescript": "^5.0.3",
     "vite": "^4.2.1",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.47",
     "vue-eslint-parser": "^9.1.1",
     "vue-tsc": "^1.2.0"
   },
   "dependencies": {
-    "vite-plugin-checker": "^0.5.6"
+    "@vueuse/core": "^9.13.0",
+    "vite-plugin-checker": "^0.5.6",
+    "uuidv4": "^5.0.1"
   }
 }

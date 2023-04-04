@@ -1,0 +1,181 @@
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable unit-disallowed-list */
+html {
+  font-family: var(--lib-app-font-family);
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  min-height: vh(100);
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  scroll-padding: toRem(20);
+  background-color: red;
+
+  @include respond-to(medium) {
+    scroll-padding-top: toRem(160);
+  }
+}
+
+/* stylelint-disable-next-line */
+body, #app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--lib-background-primary);
+  color: var(--lib-text-primary-main);
+}
+
+input,
+select,
+textarea {
+  background: var(--lib-background-primary);
+  color: var(--lib-text-primary-main);
+  font-family: var(--lib-app-font-family);
+  font-size: toRem(16);
+  font-weight: 400;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+body,
+span,
+p,
+a {
+  font-size: toRem(16);
+}
+
+button {
+  border: none;
+  width: auto;
+  overflow: visible;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  font-family: var(--lib-app-font-family);
+  font-size: toRem(16);
+  color: var(--lib-text-primary-main);
+  line-height: 1.5;
+  font-weight: 600;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+body,
+p,
+li,
+ul {
+  list-style-type: none;
+  color: var(--lib-text-primary-main);
+}
+
+p {
+  line-height: 2;
+
+  @include respond-to(tablet) { line-height: 1.6; }
+}
+
+h1,
+h2 {
+  font-weight: 900;
+}
+
+h3,
+h4,
+h5 {
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--lib-text-primary-main);
+  font-family: var(--lib-app-font-family);
+}
+
+h1 {
+  font-size: toRem(58);
+  line-height: 110%;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+
+  @include respond-to(medium) {
+    font-size: toRem(40);
+  }
+}
+
+h2 {
+  font-size: toRem(48);
+  line-height: toRem(61);
+
+  @include respond-to(medium) {
+    font-size: toRem(30);
+  }
+}
+
+h3 {
+  font-size: toRem(40);
+  line-height: toRem(50);
+
+  @include respond-to(medium) {
+    font-size: toRem(30);
+  }
+}
+
+h4 {
+  font-size: toRem(24);
+  line-height: toRem(30);
+
+  @include respond-to(medium) {
+    font-size: toRem(20);
+  }
+}
+
+h5 {
+  font-size: toRem(18);
+  line-height: 120%;
+}
+
+a {
+  font-size: toRem(16);
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--lib-primary-main);
+  text-decoration: none;
+  outline: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+::-webkit-scrollbar {
+  background-color: var(--lib-primary-dark);
+  width: toRem(4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--lib-primary-main);
+}
