@@ -1,10 +1,19 @@
 <template>
   <aside v-bind="$attrs" class="image-editor-tool-kit">
     <tools-switcher v-model="currentMode" />
+
     <hr class="image-editor-tool-kit__divider" />
+
     <layering-tool />
-    <component :is="tool" />
-    <color-tool :disabled-color-types="disabledColorTools" />
+
+    <transition name="tool-switch" mode="out-in">
+      <component :is="tool" />
+    </transition>
+
+    <color-tool
+      :disabled-color-types="disabledColorTools"
+      :is-brush="currentMode === TOOL_MODS.drawing"
+    />
     <history-tool />
     <!-- HERE WILL BE THE LIST OF COMPONENTS 
             THAT WILL REPRESENT EACH TOOL IN EDITOR-->
@@ -98,6 +107,16 @@ onBeforeUnmount(() => {
   height: toRem(1);
   width: 100%;
   border: none;
+}
+
+.tool-switch-enter-active,
+.tool-switch-leave-active {
+  transition: opacity 0.25s ease-in-out;
+}
+
+.tool-switch-enter-from,
+.tool-switch-leave-to {
+  opacity: 0;
 }
 
 .image-editor-tool-kit__context-menu {

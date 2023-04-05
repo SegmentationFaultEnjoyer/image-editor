@@ -86,10 +86,14 @@ const onInputClick = () => {
   width: var(--size);
   height: calc(var(--size) + toRem(3));
   background-color: transparent;
-  padding: 0;
   border: none;
   cursor: pointer;
   pointer-events: none;
+
+  &::-moz-color-swatch {
+    border-radius: toRem(3);
+    border: toRem(1) solid var(--lib-white);
+  }
 
   &::-webkit-color-swatch {
     border-radius: toRem(3);

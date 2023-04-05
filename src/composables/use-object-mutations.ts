@@ -13,6 +13,8 @@ export function useObjectMutations(canvas: fabric.Canvas): UseObjectMutations {
 
     if (!activeObject) return
 
+    canvas.freeDrawingBrush.color = color as string
+
     if (activeObject instanceof fabric.IText) {
       modifyTextSelection(activeObject, 'fill', color, color)
       triggerObjectModifiedEvent(canvas, activeObject)
@@ -34,8 +36,13 @@ export function useObjectMutations(canvas: fabric.Canvas): UseObjectMutations {
       return
     }
 
+    if (activeObject instanceof fabric.Path) {
+      activeObject.set('stroke', color as string)
+      canvas.renderAll()
+      return
+    }
+
     activeObject.set('fill', color as string)
-    canvas.freeDrawingBrush.color = color as string
     triggerObjectModifiedEvent(canvas, activeObject)
     canvas.renderAll()
   }

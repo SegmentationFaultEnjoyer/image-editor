@@ -9,29 +9,34 @@
         v-model="fill"
         :label="'Fill'"
       />
+      <range-field
+        v-if="isBrush"
+        v-model="strokeWidth"
+        :min="MIN_STROKE_WIDTH"
+        :max="MAX_STROKE_WIDTH"
+        :label="'Brush width'"
+      />
       <color-field
         v-if="!isColorTypeDisabled('background')"
         v-model="background"
         :label="'Background'"
       />
     </div>
-    <color-field
-      v-if="!isColorTypeDisabled('stroke')"
-      v-model="stroke"
-      :label="'Stroke'"
-    />
-    <!-- <range-field
-      v-model="strokeWidth"
-      :min="MIN_STROKE_WIDTH"
-      :max="MAX_STROKE_WIDTH"
-      :label="'Stroke width'"
-    /> -->
+    <div v-if="!isColorTypeDisabled('stroke')" class="color-tool__main-colors">
+      <color-field v-model="stroke" :label="'Stroke'" />
+      <range-field
+        v-model="strokeWidth"
+        :min="MIN_STROKE_WIDTH"
+        :max="MAX_STROKE_WIDTH"
+        :label="'Stroke width'"
+      />
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { ColorField } from '@/fields'
+import { ColorField, RangeField } from '@/fields'
 import { debounce } from 'lodash-es'
 import { safeInject } from '@/helpers'
 import { EditorInstanceKey } from '@/types'
@@ -40,6 +45,7 @@ type ColorType = 'fill' | 'background' | 'stroke'
 
 const props = defineProps<{
   disabledColorTypes?: string[]
+  isBrush?: boolean
 }>()
 
 const isColorTypeDisabled = (type: ColorType) => {
@@ -49,15 +55,15 @@ const isColorTypeDisabled = (type: ColorType) => {
 const DEFAULT_FILL_COLOR = '#000000'
 const DEFAULT_BACKGROUND_COLOR = '#000000'
 const DEFAULT_STROKE_COLOR = '#00000'
-// const DEFAULT_STROKE_WIDTH = 2
+const DEFAULT_STROKE_WIDTH = 2
 
-// const MIN_STROKE_WIDTH = 0
-// const MAX_STROKE_WIDTH = 20
+const MIN_STROKE_WIDTH = 0
+const MAX_STROKE_WIDTH = 20
 
 const fill = ref(DEFAULT_FILL_COLOR)
 const background = ref(DEFAULT_BACKGROUND_COLOR)
 const stroke = ref(DEFAULT_STROKE_COLOR)
-// const strokeWidth = ref(DEFAULT_STROKE_WIDTH)
+const strokeWidth = ref(DEFAULT_STROKE_WIDTH)
 
 const {
   instance: { setBackgroundColor, setColor, setStroke },
@@ -86,11 +92,11 @@ watch(
   }, 100),
 )
 
-// watch(strokeWidth, () => {
-//   setStroke({
-//     strokeWidth: strokeWidth.value,
-//   })
-// })
+watch(strokeWidth, () => {
+  setStroke({
+    strokeWidth: strokeWidth.value,
+  })
+})
 </script>
 
 <style lang="scss" scoped>
@@ -110,11 +116,11 @@ watch(
   gap: toRem(10);
 
   & > *:first-child {
-    flex-basis: 35%;
+    flex-basis: 40%;
   }
 
   & > *:last-child {
-    flex-basis: 65%;
+    flex-basis: 60%;
   }
 
   & > *:first-child:last-child {
