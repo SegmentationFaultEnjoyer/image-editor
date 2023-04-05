@@ -1,5 +1,5 @@
 import { fabric } from 'fabric'
-import type { UseText } from '@/types'
+import type { AlignType, UseText } from '@/types'
 import {
   animateObjectAppearence,
   modifyTextSelection,
@@ -122,6 +122,16 @@ export function useText(canvas: fabric.Canvas): UseText {
     canvas.renderAll()
   }
 
+  const changeTextAlign = (alignType: AlignType, object?: fabric.IText) => {
+    const activeObject = object ?? canvas.getActiveObject()
+
+    if (!activeObject || !(activeObject instanceof fabric.IText)) return
+
+    activeObject.set('textAlign', alignType)
+
+    canvas.renderAll()
+  }
+
   // cant be edited after adding
   const addFrame = (
     color: string,
@@ -166,6 +176,7 @@ export function useText(canvas: fabric.Canvas): UseText {
     switchBoldness,
     switchItalic,
     addText,
+    changeTextAlign,
     addFrame,
   }
 }

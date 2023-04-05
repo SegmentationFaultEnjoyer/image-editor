@@ -1,8 +1,11 @@
 <template>
-  <aside class="image-editor-tool-kit">
+  <aside v-bind="$attrs" class="image-editor-tool-kit">
     <tools-switcher v-model="currentMode" />
     <hr class="image-editor-tool-kit__divider" />
     <layering-tool />
+    <component :is="tool" />
+    <color-tool :disabled-color-types="disabledColorTools" />
+    <history-tool />
     <!-- HERE WILL BE THE LIST OF COMPONENTS 
             THAT WILL REPRESENT EACH TOOL IN EDITOR-->
 
@@ -26,16 +29,48 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, ref, computed } from 'vue'
 
 // import { ContextMenu } from '@/common'
 
 import { EditorInstanceKey } from '@/types'
-import { ToolsSwitcher, LayeringTool } from '@/components'
+import {
+  ToolsSwitcher,
+  LayeringTool,
+  TextTool,
+  ColorTool,
+  ShapesTool,
+  DrawingTool,
+  HistoryTool,
+} from '@/components'
 import { safeInject } from '@/helpers'
 import { TOOL_MODS } from '@/enums'
 
 const currentMode = ref<TOOL_MODS>(TOOL_MODS.text)
+
+const tool = computed(() => {
+  switch (currentMode.value) {
+    case TOOL_MODS.shapes:
+      return ShapesTool
+    case TOOL_MODS.drawing:
+      return DrawingTool
+    case TOOL_MODS.text:
+    default:
+      return TextTool
+  }
+})
+
+const disabledColorTools = computed(() => {
+  switch (currentMode.value) {
+    case TOOL_MODS.shapes:
+      return ['background']
+    case TOOL_MODS.drawing:
+      return ['stroke', 'background']
+    case TOOL_MODS.text:
+    default:
+      return []
+  }
+})
 
 const {
   instance: { unmountCleanUp },
@@ -51,15 +86,11 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   gap: toRem(15);
-  width: 40%;
   padding: toRem(20);
-  border: 1px solid black;
 
-  // @include respond-to(medium) {
-  //   justify-content: center;
-  //   align-items: center;
-  //   flex-flow: row wrap;
-  // }
+  & > *:last-child {
+    margin-top: auto;
+  }
 }
 
 .image-editor-tool-kit__divider {

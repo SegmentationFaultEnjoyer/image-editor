@@ -1,6 +1,5 @@
 import type { fabric } from 'fabric'
 import { useCanvasOperations } from '@/composables'
-import { History } from '@/helpers'
 
 enum ARROW_KEYS {
   left = 'ArrowLeft',
@@ -149,9 +148,10 @@ export function setCopyPasteListeners(canvas: fabric.Canvas) {
  * @returns
  * Function, that removes this listener from the Document
  */
-export function setHistoryNavigationListener(canvas: fabric.Canvas) {
-  const history = new History(canvas)
-
+export function setHistoryNavigationListener(
+  undo: () => void,
+  redo: () => void,
+) {
   const listener = (event: KeyboardEvent) => {
     if (
       event.key.toLowerCase() !== KEYBOARD_KEYS.z ||
@@ -160,11 +160,11 @@ export function setHistoryNavigationListener(canvas: fabric.Canvas) {
       return
 
     if (!event.shiftKey) {
-      history.undo()
+      undo()
       return
     }
 
-    history.redo()
+    redo()
   }
 
   document.addEventListener('keydown', listener)

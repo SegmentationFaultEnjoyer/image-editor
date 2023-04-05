@@ -1,5 +1,6 @@
 import '@/styles/variables.scss'
 import '@static/branding/fonts/index.css'
+import '@/styles/fonts.scss'
 
 import type { App, Plugin } from 'vue'
 import ImageEditor from '@/components/ImageEditor.vue'

@@ -46,6 +46,7 @@ export function useImageEditor(
     changeFont,
     changeFontSize,
     addFrame,
+    changeTextAlign,
   } = useText(canvas)
 
   const { addRectangle, addTriangle, addCircle } = useShapes(canvas)
@@ -61,6 +62,8 @@ export function useImageEditor(
     copyObjectToClipboard,
     pasteObjectFromClipboard,
     deleteObjects,
+    undo,
+    redo,
   } = useCanvasOperations(canvas)
 
   const activeObject = ref<fabric.Object | null>(null)
@@ -91,7 +94,7 @@ export function useImageEditor(
     // listeners is attached to Document and need to be removed after unmount
     const removeMoveListener = setMoveObjectsListener(canvas)
     const removeCopyPasteListener = setCopyPasteListeners(canvas)
-    const removeHistoryListener = setHistoryNavigationListener(canvas)
+    const removeHistoryListener = setHistoryNavigationListener(undo, redo)
 
     const removeListeners = () => {
       removeCopyPasteListener()
@@ -212,6 +215,7 @@ export function useImageEditor(
     switchItalic,
     changeFont,
     changeFontSize,
+    changeTextAlign,
 
     setColor,
     setBackgroundColor,
@@ -226,6 +230,8 @@ export function useImageEditor(
     copyObjectToClipboard,
     pasteObjectFromClipboard,
     deleteObjects,
+    undo,
+    redo,
 
     startDraw,
     stopDraw,

@@ -107,7 +107,7 @@ const props = withDefaults(
     label?: string
     placeholder?: string
     errorMessage?: string
-    modifications?: MODIFICATIONS
+    modifications?: MODIFICATIONS[]
   }>(),
   {
     valueOptions: () => [],
@@ -115,7 +115,7 @@ const props = withDefaults(
     label: '',
     placeholder: ' ',
     errorMessage: '',
-    modifications: 'default',
+    modifications: () => ['default'] as MODIFICATIONS[],
   },
 )
 
@@ -146,7 +146,7 @@ const selectFieldClasses = computed(() => {
   const _modifications = props.modifications
 
   const classList = [
-    ...(_modifications ? _modifications.split(' ') : []),
+    ...(_modifications ? _modifications : []),
     ...(isDropdownOpen.value ? ['open'] : []),
     ...(isDisabled.value ? ['disabled'] : []),
     ...(isReadonly.value ? ['readonly'] : []),
@@ -233,8 +233,8 @@ $z-local-index: 1;
   flex: 1;
 
   .select-field--dark & {
-    --lib-field-bg: var(--lib-background-quaternary);
-    --lib-field-border: rgba(var(--lib-white-rgb), 0.5);
+    --lib-field-bg: var(--lib-editor-background);
+    --lib-field-border: var(--lib-border-primary-main);
     --lib-field-text: var(--lib-text-primary-invert-main);
   }
 }
@@ -242,11 +242,12 @@ $z-local-index: 1;
 .select-field__select-head {
   padding: var(--lib-field-padding);
   padding-right: calc(var(--lib-field-padding-right) + #{toRem(24)});
-  transition-property: box-shadow;
   text-align: left;
   width: 100%;
   height: 100%;
   font-weight: 400;
+  transition: 0.2s ease-in-out;
+  transition-property: box-shadow border;
 
   @include lib-field-border;
 
@@ -257,11 +258,16 @@ $z-local-index: 1;
   }
 
   .select-field--dark & {
-    background-color: var(--lib-black);
+    background-color: var(--lib-editor-background);
   }
 
   .select-field--error & {
     border-color: var(--lib-field-error);
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: toRem(1) solid var(--lib-primary-main);
   }
 }
 
@@ -280,6 +286,10 @@ $z-local-index: 1;
   width: toRem(18);
   height: toRem(18);
   color: var(--lib-field-text);
+
+  .select-field--dark & {
+    color: var(--lib-border-primary-main);
+  }
 
   &--open {
     transform: translateY(-50%) rotate(180deg);

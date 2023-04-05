@@ -1,2 +1,7 @@
 export { default as ToolsSwitcher } from '@/components/tools/ToolsSwitcher.vue'
 export { default as LayeringTool } from '@/components/tools/LayeringTool.vue'
+export { default as TextTool } from '@/components/tools/TextTool.vue'
+export { default as ColorTool } from '@/components/tools/ColorTool.vue'
+export { default as ShapesTool } from '@/components/tools/ShapesTool.vue'
+export { default as DrawingTool } from '@/components/tools/DrawingTool.vue'
+export { default as HistoryTool } from '@/components/tools/HistoryTool.vue'

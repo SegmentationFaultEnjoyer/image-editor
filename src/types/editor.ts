@@ -2,6 +2,7 @@ import type { fabric } from 'fabric'
 import type { Ref } from 'vue'
 
 export type ZoomType = 'zoom' | 'reset'
+export type AlignType = 'center' | 'left' | 'right'
 export type FabricColor = string | fabric.Pattern | fabric.Gradient
 export type FabricStyle = FabricColor | number
 
@@ -33,6 +34,7 @@ export interface UseText {
   switchItalic: (object?: fabric.IText) => void
   changeFont: (font: string, object?: fabric.IText) => void
   changeFontSize: (size: number, object?: fabric.IText) => void
+  changeTextAlign: (alignType: AlignType, object?: fabric.IText) => void
   addFrame: (
     color: string,
     width: number,
@@ -50,10 +52,12 @@ export interface UseShapes {
 export interface UseCanvasOperations {
   copyObjectToClipboard: (object?: fabric.Object) => void
   pasteObjectFromClipboard: () => void
-  deleteObjects: (objects?: fabric.Object[]) => void
+  deleteObjects: (deleteAll?: boolean, objects?: fabric.Object[]) => void
   download: (options?: fabric.IDataURLOptions) => void
   canvasToFormData: (options?: fabric.IDataURLOptions) => FormData | null
   zoom: (zoomType: ZoomType, scaleFactor?: number) => void
+  undo: () => void
+  redo: () => void
   currentZoom: Ref<number>
 }
 

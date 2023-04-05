@@ -34,7 +34,8 @@ export function useObjectMutations(canvas: fabric.Canvas): UseObjectMutations {
       return
     }
 
-    activeObject.set('stroke', color as string)
+    activeObject.set('fill', color as string)
+    canvas.freeDrawingBrush.color = color as string
     triggerObjectModifiedEvent(canvas, activeObject)
     canvas.renderAll()
   }

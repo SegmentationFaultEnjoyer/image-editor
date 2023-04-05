@@ -6,6 +6,7 @@ import {
   preserveOriginalSize,
   keepObjectInBoundaries,
   dataUriToBlob,
+  History,
 } from '@/helpers'
 
 const DEFAULT_VIEWPORT = [1, 0, 0, 1, 0, 0]
@@ -18,6 +19,8 @@ export function useCanvasOperations(
 ): UseCanvasOperations {
   const currentZoom = ref(DEFAULT_ZOOM)
   let clipboard: fabric.Object | null = null
+
+  const history = new History(canvas)
 
   const download = (options?: fabric.IDataURLOptions) => {
     if (!canvas) return
@@ -130,8 +133,15 @@ export function useCanvasOperations(
     })
   }
 
-  const deleteObjects = (objects?: fabric.Object[]) => {
-    const activeObjects = objects?.length ? objects : canvas.getActiveObjects()
+  const deleteObjects = (deleteAll = false, objects?: fabric.Object[]) => {
+    // prevent from deleting guidelines
+    const nonDeletableObjectsCount = 6
+
+    let activeObjects = objects?.length ? objects : canvas.getActiveObjects()
+
+    if (deleteAll)
+      activeObjects = canvas.getObjects().slice(nonDeletableObjectsCount)
+
     if (!activeObjects.length) return
 
     canvas.discardActiveObject()
@@ -139,6 +149,14 @@ export function useCanvasOperations(
     activeObjects.forEach(object => {
       canvas.remove(object)
     })
+  }
+
+  const undo = () => {
+    history.undo()
+  }
+
+  const redo = () => {
+    history.redo()
   }
 
   return {
@@ -150,5 +168,8 @@ export function useCanvasOperations(
     copyObjectToClipboard,
     pasteObjectFromClipboard,
     deleteObjects,
+
+    undo,
+    redo,
   }
 }

@@ -1,6 +1,13 @@
 <template>
   <button v-bind="$attrs" :class="buttonClasses" :type="type">
-    <icon class="editor-button__icon" :name="iconName" />
+    <icon
+      v-if="modifications !== 'no-icon'"
+      :class="iconClasses"
+      :name="iconName"
+    />
+    <span v-if="text" class="editor-button__text">
+      {{ text }}
+    </span>
   </button>
 </template>
 
@@ -9,22 +16,30 @@ import { useAttrs, computed } from 'vue'
 import { Icon } from '@/common'
 import { ICON_NAMES } from '@/enums'
 
-type Size = 'small' | 'x-medium' | 'medium' | 'large'
-type Modification = 'first-in-group' | 'last-in-group' | 'default'
+type Size = 'x-small' | 'small' | 'x-medium' | 'medium' | 'large'
+type IconSize = 'small' | 'medium' | 'large'
+type Modification = 'first-in-group' | 'last-in-group' | 'default' | 'no-icon'
 type ButtonType = 'submit' | 'reset' | 'button'
+type Scheme = 'reset' | 'default'
 
 const props = withDefaults(
   defineProps<{
     iconName?: ICON_NAMES
     size?: Size
+    text?: string
+    iconSize?: IconSize
+    scheme?: Scheme
     modifications?: Modification
     type?: ButtonType
   }>(),
   {
     iconName: ICON_NAMES.text,
     size: 'medium',
+    iconSize: 'medium',
     modifications: 'default',
     type: 'button',
+    text: '',
+    scheme: 'default',
   },
 )
 
@@ -34,11 +49,17 @@ const isDisabled = computed((): boolean =>
   ['', 'disabled', true].includes(attrs.disabled as string | boolean),
 )
 
+const iconClasses = computed(() => [
+  'editor-button__icon',
+  `editor-button__icon--${props.iconSize}`,
+])
+
 const buttonClasses = computed(() =>
   [
     'editor-button',
     `editor-button--${props.modifications}`,
     `editor-button--${props.size}`,
+    `editor-button--${props.scheme}`,
     ...(isDisabled.value ? ['editor-button--disabled'] : []),
   ].join(' '),
 )
@@ -86,6 +107,11 @@ const buttonClasses = computed(() =>
     height: toRem(40);
   }
 
+  &--x-small {
+    width: toRem(36);
+    height: toRem(40);
+  }
+
   &--first-in-group {
     border-radius: toRem(8) 0 0 toRem(8);
   }
@@ -93,13 +119,43 @@ const buttonClasses = computed(() =>
   &--last-in-group {
     border-radius: 0 toRem(8) toRem(8) 0;
   }
+
+  &--reset {
+    border: toRem(1) solid var(--lib-error-main);
+  }
+
+  &--no-icon {
+    width: max-content;
+    padding: toRem(8) toRem(12);
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--lib-background-quaternary);
+    }
+  }
+}
+
+.editor-button__text {
+  font-weight: 400;
+  font-size: toRem(12);
+  line-height: 110%;
+
+  .editor-button--reset & {
+    color: var(--lib-error-main);
+  }
 }
 
 .editor-button__icon {
-  --icon-size: #{toRem(20)};
-
   max-width: var(--icon-size);
   max-height: var(--icon-size);
   color: var(--lib-background-tertiary);
+
+  &--medium {
+    --icon-size: #{toRem(20)};
+  }
+
+  &--large {
+    --icon-size: #{toRem(25)};
+  }
 }
 </style>

@@ -39,7 +39,6 @@ $media-breakpoints: (
   line-height: var(--lib-field-text-line-height);
   -webkit-text-fill-color: var(--lib-field-text-font-size);
   color: var(--lib-field-text);
-  transition: color var(--lib-field-transition-duration) ease;
 }
 
 @mixin lib-field-label {

@@ -49,6 +49,8 @@ const {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-flow: row wrap;
+  gap: toRem(10);
 }
 
 .layering-tool__layers {

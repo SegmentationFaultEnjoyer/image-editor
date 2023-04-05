@@ -1,11 +1,3 @@
-/* @font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./Roboto/Roboto-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-} */
-
 @font-face {
   font-family:'Jakarta';
   src: local('Jakarta'), url('./PlusJakarta/Jakarta Sans Bold Italic.woff2') format('woff2');
