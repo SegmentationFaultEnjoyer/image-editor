@@ -8,7 +8,7 @@
     </header>
 
     <section class="sandbox__content">
-      <image-editor ref="editorInstance" />
+      <image-editor ref="editorInstance" :image-url="testImage" />
       <editor-button
         modifications="no-icon"
         :text="'DOWNLOAD'"
@@ -23,9 +23,11 @@
 import { ImageEditor } from '@/components'
 import { EditorButton } from '@/common'
 import type { UseImageEditor } from '@/types'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 const title = 'Purchasing'
+const testImage =
+  'https://tokend-nftbooks.s3.us-east-2.amazonaws.com/f6391766-11b1-48cf-aa55-811948c26bd9.png'
 const editorInstance = ref<{
   editorInstance: UseImageEditor | null
 }>()
@@ -39,12 +41,6 @@ const download = () => {
 
   editor.download()
 }
-
-watch(editorInstance, () => {
-  if (!editorInstance.value) return
-
-  console.log(editorInstance.value.editorInstance)
-})
 </script>
 
 <style lang="scss" scoped>

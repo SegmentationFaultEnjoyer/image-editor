@@ -2,15 +2,13 @@
   <div class="image-editor">
     <loader v-if="!isEditorInitialized" />
 
-    <div class="image-editor__editor">
-      <div
-        ref="editorContainerRef"
-        class="image-editor__canvas-wrapper"
-        :class="{
-          'image-editor__canvas-wrapper--hidden':
-            !isEditorInitialized || isInitFailed,
-        }"
-      >
+    <div
+      class="image-editor__editor"
+      :class="{
+        'image-editor__editor--hidden': !isEditorInitialized || isInitFailed,
+      }"
+    >
+      <div ref="editorContainerRef" class="image-editor__canvas-wrapper">
         <canvas ref="editorCanvasRef" class="image-editor__canvas" />
       </div>
       <image-editor-tool-kit v-if="isEditorInitialized && !isInitFailed" />
@@ -98,6 +96,11 @@ onMounted(async () => {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(65%, 1fr) minmax(toRem(150), toRem(300));
+
+  &--hidden {
+    visibility: hidden;
+    position: absolute;
+  }
 }
 
 .image-editor__canvas-wrapper {
@@ -111,11 +114,6 @@ onMounted(async () => {
   padding: toRem(40);
   background-color: var(--lib-editor-background);
   position: static;
-
-  &--hidden {
-    visibility: hidden;
-    position: absolute;
-  }
 
   @include respond-to(small) {
     padding: toRem(20) 0;
