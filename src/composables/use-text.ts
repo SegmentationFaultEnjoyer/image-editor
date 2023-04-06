@@ -132,6 +132,10 @@ export function useText(canvas: fabric.Canvas): UseText {
     canvas.renderAll()
   }
 
+  const isText = (object: fabric.Object) => {
+    return object instanceof fabric.IText
+  }
+
   // cant be edited after adding
   const addFrame = (
     color: string,
@@ -178,5 +182,6 @@ export function useText(canvas: fabric.Canvas): UseText {
     addText,
     changeTextAlign,
     addFrame,
+    isText,
   }
 }

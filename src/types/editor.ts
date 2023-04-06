@@ -20,7 +20,10 @@ export interface UseImageEditor
     UseDrawing {
   canvas: fabric.Canvas | null
   activeObject: Ref<fabric.Object | null>
-  isContextMenuShown: Ref<boolean>
+  contextMenuState: Ref<{
+    isShown: boolean
+    target?: fabric.Object
+  }>
   init: (
     imageUrl: string,
     customOptions?: fabric.IImageOptions,
@@ -35,6 +38,7 @@ export interface UseText {
   changeFont: (font: string, object?: fabric.IText) => void
   changeFontSize: (size: number, object?: fabric.IText) => void
   changeTextAlign: (alignType: AlignType, object?: fabric.IText) => void
+  isText: (object: fabric.Object) => boolean
   addFrame: (
     color: string,
     width: number,
@@ -47,12 +51,15 @@ export interface UseShapes {
   addRectangle: (options?: fabric.IRectOptions) => void
   addTriangle: (options?: fabric.ITriangleOptions) => void
   addCircle: (options?: fabric.ICircleOptions) => void
+  isShape: (object: fabric.Object) => boolean
+  isDrawingObject: (object: fabric.Object) => boolean
 }
 
 export interface UseCanvasOperations {
   copyObjectToClipboard: (object?: fabric.Object) => void
   pasteObjectFromClipboard: () => void
   deleteObjects: (deleteAll?: boolean, objects?: fabric.Object[]) => void
+  discardActiveObject: () => void
   download: (options?: fabric.IDataURLOptions) => void
   canvasToFormData: (options?: fabric.IDataURLOptions) => FormData | null
   zoom: (zoomType: ZoomType, scaleFactor?: number) => void

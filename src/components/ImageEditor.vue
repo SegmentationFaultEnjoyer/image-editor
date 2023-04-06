@@ -26,13 +26,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, provide, type Ref } from 'vue'
+import { ref, onMounted, provide, type Ref, defineExpose } from 'vue'
 import { Loader, ErrorMessage } from '@/common'
 import { useImageEditor } from '@/composables'
 import { ImageEditorToolKit } from '@/components'
-import { EditorInstanceKey } from '@/types'
+import { EditorInstanceKey, type UseImageEditor } from '@/types'
 
 import { ICON_NAMES } from '@/enums'
+
+type ExposedEditorInstance = {
+  editorInstance: Ref<UseImageEditor | undefined>
+}
 
 const props = withDefaults(
   defineProps<{
@@ -49,6 +53,12 @@ const errorMsg = ref('')
 const editorContainerRef = ref<HTMLElement | null>(null)
 const editorCanvasRef = ref<HTMLCanvasElement | null>(null)
 
+const exposedEditorInstance = ref<UseImageEditor>()
+
+defineExpose<ExposedEditorInstance>({
+  editorInstance: exposedEditorInstance,
+})
+
 onMounted(async () => {
   if (!editorCanvasRef.value || !editorContainerRef.value) return
 
@@ -59,6 +69,7 @@ onMounted(async () => {
 
   // providing canvas instance to all nested layers to avoid props drilling
   provide(EditorInstanceKey, { instance: editorInstance })
+  exposedEditorInstance.value = editorInstance
 
   try {
     await editorInstance.init(props.imageUrl)
@@ -79,6 +90,8 @@ onMounted(async () => {
   justify-content: center;
   padding: toRem(20) 0;
   gap: toRem(20);
+  background-color: var(--lib-background-quaternary);
+  padding: toRem(20);
 }
 
 .image-editor__editor {

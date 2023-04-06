@@ -51,9 +51,24 @@ export function useShapes(canvas: fabric.Canvas): UseShapes {
     animateObjectAppearence(canvas, circle)
   }
 
+  const isShape = (object: fabric.Object) => {
+    return (
+      object instanceof fabric.Circle ||
+      object instanceof fabric.Rect ||
+      object instanceof fabric.Triangle
+    )
+  }
+
+  // pencil drawing - path, spray and circle - group
+  const isDrawingObject = (object: fabric.Object) => {
+    return object instanceof fabric.Path || object instanceof fabric.Group
+  }
+
   return {
     addRectangle,
     addTriangle,
     addCircle,
+    isShape,
+    isDrawingObject,
   }
 }

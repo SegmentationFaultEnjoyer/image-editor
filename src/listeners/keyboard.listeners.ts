@@ -58,6 +58,8 @@ export function setMoveObjectsListener(canvas: fabric.Canvas, moveStep = 1) {
     if (!Object.values(ARROW_KEYS).includes(event.key as unknown as ARROW_KEYS))
       return
 
+    event.preventDefault()
+
     const activeObjects = canvas.getActiveObjects()
     if (!activeObjects.length) return
 
@@ -110,22 +112,19 @@ export function setMoveObjectsListener(canvas: fabric.Canvas, moveStep = 1) {
  * Function, that removes listeners from the Document
  */
 
-export function setCopyPasteListeners(canvas: fabric.Canvas) {
-  const { copyObjectToClipboard, pasteObjectFromClipboard } =
-    useCanvasOperations(canvas)
-
+export function setCopyPasteListeners(copy: () => void, paste: () => void) {
   const copyListener = (event: KeyboardEvent) => {
     if (event.key !== KEYBOARD_KEYS.c || (!event.metaKey && !event.ctrlKey))
       return
 
-    copyObjectToClipboard()
+    copy()
   }
 
   const pasteListener = (event: KeyboardEvent) => {
     if (event.key !== KEYBOARD_KEYS.v || (!event.metaKey && !event.ctrlKey))
       return
 
-    pasteObjectFromClipboard()
+    paste()
   }
 
   document.addEventListener('keydown', copyListener)

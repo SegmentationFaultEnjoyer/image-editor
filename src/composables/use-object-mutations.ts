@@ -26,7 +26,7 @@ export function useObjectMutations(canvas: fabric.Canvas): UseObjectMutations {
       modifyGroup(
         activeObject,
         {
-          default: 'stroke',
+          default: 'fill',
           text: 'fill',
         },
         color,

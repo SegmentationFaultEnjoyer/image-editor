@@ -22,6 +22,8 @@
 import { watch, ref } from 'vue'
 import { EditorButton } from '@/common'
 import { ICON_NAMES, TOOL_MODS } from '@/enums'
+import { safeInject } from '@/helpers'
+import { EditorInstanceKey } from '@/types'
 
 const props = withDefaults(
   defineProps<{
@@ -37,6 +39,19 @@ const emit = defineEmits<{
 }>()
 
 const pickedMod = ref<TOOL_MODS>(props.modelValue)
+
+const {
+  instance: { activeObject, isShape, isText, isDrawingObject },
+} = safeInject(EditorInstanceKey)
+
+watch(activeObject, () => {
+  if (!activeObject.value) return
+
+  if (isShape(activeObject.value)) emit('update:modelValue', TOOL_MODS.shapes)
+  if (isText(activeObject.value)) emit('update:modelValue', TOOL_MODS.text)
+  if (isDrawingObject(activeObject.value))
+    emit('update:modelValue', TOOL_MODS.drawing)
+})
 
 watch(
   () => props.modelValue,

@@ -11,36 +11,48 @@
     </transition>
 
     <color-tool
+      v-if="currentMode !== TOOL_MODS.drawing"
       :disabled-color-types="disabledColorTools"
-      :is-brush="currentMode === TOOL_MODS.drawing"
     />
-    <history-tool />
-    <!-- HERE WILL BE THE LIST OF COMPONENTS 
-            THAT WILL REPRESENT EACH TOOL IN EDITOR-->
+    <history-tool class="image-editor-tool-kit__history" />
 
-    <!-- <context-menu v-model:is-shown="isContextMenuShown">
+    <context-menu v-model:is-shown="contextMenuState.isShown">
       <ul class="image-editor-tool-kit__context-menu">
+        <template v-if="contextMenuState.target">
+          <li
+            class="image-editor-tool-kit__context-menu-item"
+            @click="bringToFrontClick"
+          >
+            {{ 'Bring to front' }}
+          </li>
+          <li
+            class="image-editor-tool-kit__context-menu-item"
+            @click="sendToBackClick"
+          >
+            {{ 'Send to back' }}
+          </li>
+          <li
+            class="image-editor-tool-kit__context-menu-item"
+            @click="copyClick"
+          >
+            {{ 'Copy object' }}
+          </li>
+        </template>
         <li
           class="image-editor-tool-kit__context-menu-item"
-          @click="bringToFrontClick"
+          @click="pasteClick"
         >
-          {{ $t('image-editor.context-menu.bring-to-front-lbl') }}
-        </li>
-        <li
-          class="image-editor-tool-kit__context-menu-item"
-          @click="sendToBackClick"
-        >
-          {{ $t('image-editor.context-menu.send-to-back-lbl') }}
+          {{ 'Paste object' }}
         </li>
       </ul>
-    </context-menu> -->
+    </context-menu>
   </aside>
 </template>
 
 <script setup lang="ts">
 import { onBeforeUnmount, ref, computed } from 'vue'
 
-// import { ContextMenu } from '@/common'
+import { ContextMenu } from '@/common'
 
 import { EditorInstanceKey } from '@/types'
 import {
@@ -74,7 +86,6 @@ const disabledColorTools = computed(() => {
     case TOOL_MODS.shapes:
       return ['background']
     case TOOL_MODS.drawing:
-      return ['stroke', 'background']
     case TOOL_MODS.text:
     default:
       return []
@@ -82,8 +93,36 @@ const disabledColorTools = computed(() => {
 })
 
 const {
-  instance: { unmountCleanUp },
+  instance: {
+    unmountCleanUp,
+    contextMenuState,
+    bringToFront,
+    sendToBack,
+    copyObjectToClipboard,
+    pasteObjectFromClipboard,
+  },
 } = safeInject(EditorInstanceKey)
+
+const bringToFrontClick = () => {
+  bringToFront()
+  contextMenuState.value.isShown = false
+}
+
+const sendToBackClick = () => {
+  sendToBack()
+  contextMenuState.value.isShown = false
+}
+
+const copyClick = () => {
+  copyObjectToClipboard()
+  contextMenuState.value.isShown = false
+}
+
+const pasteClick = () => {
+  pasteObjectFromClipboard()
+  contextMenuState.value.isShown = false
+}
+
 onBeforeUnmount(() => {
   if (!unmountCleanUp.value) return
 
@@ -96,10 +135,6 @@ onBeforeUnmount(() => {
   flex-direction: column;
   gap: toRem(15);
   padding: toRem(20);
-
-  & > *:last-child {
-    margin-top: auto;
-  }
 }
 
 .image-editor-tool-kit__divider {
@@ -107,6 +142,10 @@ onBeforeUnmount(() => {
   height: toRem(1);
   width: 100%;
   border: none;
+}
+
+.image-editor-tool-kit__history {
+  margin-top: auto;
 }
 
 .tool-switch-enter-active,
@@ -127,10 +166,16 @@ onBeforeUnmount(() => {
 }
 
 .image-editor-tool-kit__context-menu-item {
-  transition: 0.2 ease-in-out;
+  transition: 0.2s ease-in-out;
   transition-property: background-color;
-  background-color: var(--background-primary);
+  background-color: var(--lib-background-primary);
   padding: toRem(10) toRem(15);
+  font-weight: 400;
+  font-size: toRem(15);
+
+  &:first-child:last-child {
+    border-radius: toRem(8);
+  }
 
   &:first-child {
     border-radius: toRem(8) toRem(8) 0 0;
@@ -142,7 +187,7 @@ onBeforeUnmount(() => {
 
   &:hover {
     cursor: pointer;
-    background-color: var(--background-tertiary);
+    background-color: var(--lib-background-tertiary);
   }
 }
 </style>

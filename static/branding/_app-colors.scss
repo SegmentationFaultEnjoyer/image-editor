@@ -75,4 +75,6 @@ $lib-border-secondary-dark: #978d8d;
 $lib-border-black: #3E3E3E;
 
 /* other colors */
-$lib-editor-background: #292929
+$lib-editor-background: #292929;
+$drop-down-shadow: #b6b6b7;
+$drop-down-shadow-rgb: hexToRGB($drop-down-shadow);

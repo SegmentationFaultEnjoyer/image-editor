@@ -39,7 +39,33 @@ import { ImageEditor } from 'simple-fabric-vue-image-editor'
 </script>
 ````
 
-also you need to import styles if you want to use Vue components
+<b>Also editor exposes its instance via template ref. Usage example:</b>
+```vue
+    <template>
+        <image-editor ref="editorInstance"/>
+        <button @click="download" />
+    </template>
+
+    <script setup lang="ts">
+    import { ref } from 'vue'
+
+    const editorInstance = ref<{
+        editorInstance: UseImageEditor | null
+    }>()
+
+    const download = () => {
+        if (!editorInstance.value) return
+
+        const { editorInstance: editor } = editorInstance.value
+
+        if (!editor) return
+
+        editor.download()
+    }
+    </script>
+```
+
+you need to import styles if you want to use Vue components
 ```javascript
 import 'simple-fabric-vue-image-editor/dist/fabric-vue-image-editor-ts.css'
 ```

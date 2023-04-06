@@ -22,16 +22,31 @@
         @click="pickSpray"
       />
     </div>
+    <div class="drawing-tool__settings">
+      <p class="drawing-tool__label">
+        {{ 'Settings' }}
+      </p>
+      <color-field v-model="brushColor" :label="'Brush color'" />
+      <range-field
+        v-model="brushSize"
+        :min="MIN_BRUSH_SIZE"
+        :max="MAX_BRUSH_SIZE"
+        :label="'Brush width'"
+      />
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onBeforeUnmount } from 'vue'
 import { EditorButton } from '@/common'
 import { ICON_NAMES } from '@/enums'
 import { safeInject } from '@/helpers'
 import { BRUSHES, EditorInstanceKey } from '@/types'
+import { RangeField, ColorField } from '@/fields'
 
+const MIN_BRUSH_SIZE = 1
+const MAX_BRUSH_SIZE = 20
 const DEFAULT_BRUSH_SIZE = 5
 const DEFAULT_BRUSH_COLOR = '#00000'
 
@@ -41,7 +56,7 @@ const brushColor = ref(DEFAULT_BRUSH_COLOR)
 const brushSize = ref(DEFAULT_BRUSH_SIZE)
 
 const {
-  instance: { startDraw, modifyBrush, stopDraw },
+  instance: { startDraw, modifyBrush, stopDraw, setStroke, setColor },
 } = safeInject(EditorInstanceKey)
 
 const stopDrawingMode = () => {
@@ -83,12 +98,20 @@ watch(brushSize, () => {
   modifyBrush({
     width: brushSize.value,
   })
+  setStroke({
+    strokeWidth: brushSize.value,
+  })
 })
 
 watch(brushColor, () => {
   modifyBrush({
     color: brushColor.value,
   })
+  setColor(brushColor.value)
+})
+
+onBeforeUnmount(() => {
+  stopDrawingMode()
 })
 </script>
 
@@ -99,9 +122,16 @@ watch(brushColor, () => {
   gap: toRem(8);
 }
 
+.drawing-tool__settings {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+}
+
 .drawing-tool__brushes {
   display: flex;
   justify-content: center;
+  margin-bottom: toRem(10);
 
   & > *:nth-child(2) {
     border-radius: 0;

@@ -47,9 +47,11 @@ export function useImageEditor(
     changeFontSize,
     addFrame,
     changeTextAlign,
+    isText,
   } = useText(canvas)
 
-  const { addRectangle, addTriangle, addCircle } = useShapes(canvas)
+  const { addRectangle, addTriangle, addCircle, isShape, isDrawingObject } =
+    useShapes(canvas)
 
   const { startDraw, stopDraw, modifyBrush } = useDrawing(canvas)
   const { setBackgroundColor, setColor, setStroke, bringToFront, sendToBack } =
@@ -64,10 +66,16 @@ export function useImageEditor(
     deleteObjects,
     undo,
     redo,
+    discardActiveObject,
   } = useCanvasOperations(canvas)
 
   const activeObject = ref<fabric.Object | null>(null)
-  const isContextMenuShown = ref(false)
+  const contextMenuState = ref<{
+    isShown: boolean
+    target?: fabric.Object
+  }>({
+    isShown: false,
+  })
 
   // should be invoked in component`s onBeforeUnmount lifecycle hook
   const unmountCleanUp = ref<(() => void) | null>(null)
@@ -89,11 +97,14 @@ export function useImageEditor(
     setSelectionListeners(canvas, activeObject)
     setCreationListener(canvas, activeObject)
     setGuideLineIntersectionListener(canvas)
-    setRightClickListener(canvas, isContextMenuShown)
+    setRightClickListener(canvas, contextMenuState)
 
     // listeners is attached to Document and need to be removed after unmount
     const removeMoveListener = setMoveObjectsListener(canvas)
-    const removeCopyPasteListener = setCopyPasteListeners(canvas)
+    const removeCopyPasteListener = setCopyPasteListeners(
+      copyObjectToClipboard,
+      pasteObjectFromClipboard,
+    )
     const removeHistoryListener = setHistoryNavigationListener(undo, redo)
 
     const removeListeners = () => {
@@ -201,13 +212,15 @@ export function useImageEditor(
   return {
     canvas,
     activeObject,
-    isContextMenuShown,
+    contextMenuState,
     init,
     unmountCleanUp,
 
     addRectangle,
     addTriangle,
     addCircle,
+    isShape,
+    isDrawingObject,
 
     addText,
     addFrame,
@@ -216,6 +229,7 @@ export function useImageEditor(
     changeFont,
     changeFontSize,
     changeTextAlign,
+    isText,
 
     setColor,
     setBackgroundColor,
@@ -230,6 +244,7 @@ export function useImageEditor(
     copyObjectToClipboard,
     pasteObjectFromClipboard,
     deleteObjects,
+    discardActiveObject,
     undo,
     redo,
 

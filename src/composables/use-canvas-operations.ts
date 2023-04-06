@@ -133,6 +133,11 @@ export function useCanvasOperations(
     })
   }
 
+  const discardActiveObject = () => {
+    canvas.discardActiveObject()
+    canvas.renderAll()
+  }
+
   const deleteObjects = (deleteAll = false, objects?: fabric.Object[]) => {
     // prevent from deleting guidelines
     const nonDeletableObjectsCount = 6
@@ -144,7 +149,7 @@ export function useCanvasOperations(
 
     if (!activeObjects.length) return
 
-    canvas.discardActiveObject()
+    discardActiveObject()
 
     activeObjects.forEach(object => {
       canvas.remove(object)
@@ -168,6 +173,7 @@ export function useCanvasOperations(
     copyObjectToClipboard,
     pasteObjectFromClipboard,
     deleteObjects,
+    discardActiveObject,
 
     undo,
     redo,

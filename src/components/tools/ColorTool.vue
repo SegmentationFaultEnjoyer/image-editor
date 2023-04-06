@@ -9,13 +9,6 @@
         v-model="fill"
         :label="'Fill'"
       />
-      <range-field
-        v-if="isBrush"
-        v-model="strokeWidth"
-        :min="MIN_STROKE_WIDTH"
-        :max="MAX_STROKE_WIDTH"
-        :label="'Brush width'"
-      />
       <color-field
         v-if="!isColorTypeDisabled('background')"
         v-model="background"
@@ -45,7 +38,6 @@ type ColorType = 'fill' | 'background' | 'stroke'
 
 const props = defineProps<{
   disabledColorTypes?: string[]
-  isBrush?: boolean
 }>()
 
 const isColorTypeDisabled = (type: ColorType) => {

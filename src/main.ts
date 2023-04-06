@@ -5,7 +5,7 @@ import '@/styles/fonts.scss'
 import type { App, Plugin } from 'vue'
 import ImageEditor from '@/components/ImageEditor.vue'
 import { useImageEditor } from '@/composables'
-import { EditorInstanceKey } from '@/types'
+import { EditorInstanceKey, type UseImageEditor } from '@/types'
 
 export default {
   install: (app: App) => {
@@ -15,4 +15,4 @@ export default {
   },
 } as Plugin
 
-export { ImageEditor, useImageEditor, EditorInstanceKey }
+export { ImageEditor, useImageEditor, EditorInstanceKey, UseImageEditor }

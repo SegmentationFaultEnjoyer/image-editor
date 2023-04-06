@@ -96,13 +96,15 @@ onMounted(() => {
 }
 
 .range-field__wrapper {
+  --max-width: #{toRem(165)};
+
   display: flex;
   flex-direction: column;
   gap: toRem(20);
   position: absolute;
-  max-width: toRem(165);
+  max-width: var(--max-width);
   bottom: toRem(-80);
-  left: 0;
+  left: calc(50% - var(--max-width) / 2);
   border-radius: toRem(16);
   border: toRem(1) solid var(--lib-primary-main);
   padding: toRem(14) toRem(12);

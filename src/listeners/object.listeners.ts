@@ -17,13 +17,13 @@ export function setSelectionListeners(
   activeObject: Ref<fabric.Object | null>,
 ) {
   canvas.on('selection:created', event => {
-    if (!event.selected) return
+    if (!event.selected || event.selected.length > 1) return
 
     activeObject.value = event.selected[0]
   })
 
   canvas.on('selection:updated', event => {
-    if (!event.selected) return
+    if (!event.selected || event.selected.length > 1) return
 
     activeObject.value = event.selected[0]
   })

@@ -17,7 +17,10 @@ enum MOUSE_BUTTONS {
  */
 export function setRightClickListener(
   canvas: fabric.Canvas,
-  contextMenuState: Ref<boolean>,
+  contextMenuState: Ref<{
+    isShown: boolean
+    target?: fabric.Object
+  }>,
 ) {
   canvas.on('mouse:down', event => {
     if (event.e.button !== MOUSE_BUTTONS.right) return
@@ -29,10 +32,9 @@ export function setRightClickListener(
         object.containsPoint(new fabric.Point(pointer.x, pointer.y)),
       )
 
-    if (!target) return
+    if (target) canvas.setActiveObject(target)
 
-    canvas.setActiveObject(target)
-
-    contextMenuState.value = !contextMenuState.value
+    contextMenuState.value.isShown = !contextMenuState.value.isShown
+    contextMenuState.value.target = target
   })
 }
