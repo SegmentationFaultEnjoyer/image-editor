@@ -47,6 +47,7 @@ import { ImageEditor } from 'simple-fabric-vue-image-editor'
     </template>
 
     <script setup lang="ts">
+    import { ImageEditor } from 'simple-fabric-vue-image-editor'
     import { ref } from 'vue'
 
     const editorInstance = ref<{
