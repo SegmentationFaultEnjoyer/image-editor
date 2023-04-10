@@ -79,6 +79,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: toRem(5);
   width: 100%;
   min-height: toRem(41);
   border-radius: toRem(8);

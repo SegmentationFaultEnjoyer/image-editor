@@ -119,11 +119,19 @@ watch(strokeWidth, () => {
     flex-basis: 100%;
   }
 
-  @include respond-to(medium) {
+  @include respond-to(xmedium) {
     flex-flow: row wrap;
 
     & > * {
       flex: 1;
+    }
+  }
+
+  @include respond-to(medium) {
+    flex-wrap: nowrap;
+
+    & > * {
+      flex: unset;
     }
   }
 }

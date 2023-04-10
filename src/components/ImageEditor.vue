@@ -101,6 +101,11 @@ onMounted(async () => {
     visibility: hidden;
     position: absolute;
   }
+
+  @include respond-to(medium) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .image-editor__canvas-wrapper {

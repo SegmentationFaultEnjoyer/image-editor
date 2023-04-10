@@ -23,7 +23,7 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "yarn lint && rm -rf dist && vite build && npm run build:types",
     "publish-package": "npm pack && npm publish && rm -rf *.tgz",
     "build:types": "vue-tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir ./dist/types && tsc-alias -p tsconfig.types.json --outDir ./dist/types",

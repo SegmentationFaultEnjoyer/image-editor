@@ -37,12 +37,8 @@ const {
 .history-tool {
   display: flex;
   justify-content: space-between;
+  flex-flow: row wrap;
   gap: toRem(10);
-
-  @include respond-to(xmedium) {
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 .history-tool__actions {

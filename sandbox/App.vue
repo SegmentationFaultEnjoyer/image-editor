@@ -50,6 +50,10 @@ const download = () => {
   width: 100%;
   padding: toRem(60);
   align-items: center;
+
+  @include respond-to(small) {
+    padding: toRem(10);
+  }
 }
 
 .sandbox__header {
@@ -65,5 +69,10 @@ const download = () => {
   width: 70%;
   font-weight: 700;
   padding: toRem(25);
+
+  @include respond-to(medium) {
+    width: 100%;
+    padding: 0;
+  }
 }
 </style>
