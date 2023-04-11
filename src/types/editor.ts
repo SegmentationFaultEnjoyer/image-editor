@@ -60,8 +60,11 @@ export interface UseCanvasOperations {
   pasteObjectFromClipboard: () => void
   deleteObjects: (deleteAll?: boolean, objects?: fabric.Object[]) => void
   discardActiveObject: () => void
-  download: (options?: fabric.IDataURLOptions) => void
-  canvasToFormData: (options?: fabric.IDataURLOptions) => FormData | null
+  download: (fileName: string, options?: fabric.IDataURLOptions) => void
+  canvasToFormData: (
+    fileName: string,
+    options?: fabric.IDataURLOptions,
+  ) => FormData | null
   zoom: (zoomType: ZoomType, scaleFactor?: number) => void
   undo: () => void
   redo: () => void

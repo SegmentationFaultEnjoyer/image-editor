@@ -39,7 +39,7 @@ const download = () => {
 
   if (!editor) return
 
-  editor.download()
+  editor.download('test.image')
 }
 </script>
 

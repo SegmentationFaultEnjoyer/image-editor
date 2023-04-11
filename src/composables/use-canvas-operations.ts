@@ -22,7 +22,7 @@ export function useCanvasOperations(
 
   const history = new History(canvas)
 
-  const download = (options?: fabric.IDataURLOptions) => {
+  const download = (fileName: string, options?: fabric.IDataURLOptions) => {
     if (!canvas) return
 
     resetZoom()
@@ -35,7 +35,7 @@ export function useCanvasOperations(
     const dataURL = canvas.toDataURL(options)
 
     const downloadLink = document.createElement('a')
-    downloadLink.setAttribute('download', 'test-image.png')
+    downloadLink.setAttribute('download', fileName)
 
     downloadLink.setAttribute('href', dataURL)
 
@@ -44,7 +44,10 @@ export function useCanvasOperations(
     restoreSize()
   }
 
-  const canvasToFormData = (options?: fabric.IDataURLOptions) => {
+  const canvasToFormData = (
+    fileName: string,
+    options?: fabric.IDataURLOptions,
+  ) => {
     if (!canvas) return null
 
     resetZoom()
@@ -57,7 +60,7 @@ export function useCanvasOperations(
     const blob = dataUriToBlob(base64, 'image/png')
 
     const formData = new FormData()
-    formData.append('Document', blob)
+    formData.append(fileName, blob)
 
     restoreSize()
 
