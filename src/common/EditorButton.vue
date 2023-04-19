@@ -139,6 +139,7 @@ const buttonClasses = computed(() =>
   font-weight: 400;
   font-size: toRem(12);
   line-height: 110%;
+  color: var(--lib-text-primary-invert-main);
 
   .editor-button--reset & {
     color: var(--lib-error-main);

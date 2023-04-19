@@ -16,3 +16,10 @@ export function dataUriToBlob(dataURI: string, mimeType: string): Blob {
     type: mimeType,
   })
 }
+
+export async function dataUriToBlobViaFetch(dataURI: string): Promise<Blob> {
+  const response = await fetch(dataURI)
+  const blob = await response.blob()
+
+  return blob
+}

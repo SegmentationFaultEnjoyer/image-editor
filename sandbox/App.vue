@@ -13,9 +13,10 @@
         modifications="no-icon"
         :text="'DOWNLOAD'"
         scheme="reset"
-        @click="download"
+        @click="toFormData"
       />
     </section>
+    <img class="pidor" v-if="src" :src="src" />
   </div>
 </template>
 
@@ -41,6 +42,22 @@ const download = () => {
 
   editor.download('test.image')
 }
+
+const src = ref('')
+
+const toFormData = async () => {
+  if (!editorInstance.value) return
+
+  const { editorInstance: editor } = editorInstance.value
+
+  if (!editor) return
+
+  const formData = await editor.canvasToFormData('Banner')
+
+  if (!formData) return
+  // console.log(formData, formData?.get('Banner'))
+  src.value = URL.createObjectURL(formData.get('Banner'))
+}
 </script>
 
 <style lang="scss" scoped>
@@ -56,6 +73,9 @@ const download = () => {
   }
 }
 
+.pidor {
+  width: toRem(500);
+}
 .sandbox__header {
   display: flex;
   flex-direction: column;

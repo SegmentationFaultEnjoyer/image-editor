@@ -22,4 +22,6 @@ export enum ICON_NAMES {
   trash = 'trash',
   triangle = 'triangle',
   undo = 'undo',
+  zoomPlus = 'zoom-plus',
+  zoomMinus = 'zoom-minus',
 }

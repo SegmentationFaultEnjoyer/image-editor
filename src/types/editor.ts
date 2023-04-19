@@ -64,7 +64,7 @@ export interface UseCanvasOperations {
   canvasToFormData: (
     fileName: string,
     options?: fabric.IDataURLOptions,
-  ) => FormData | null
+  ) => Promise<FormData | null>
   zoom: (zoomType: ZoomType, scaleFactor?: number) => void
   undo: () => void
   redo: () => void

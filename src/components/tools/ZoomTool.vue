@@ -1,24 +1,38 @@
 <template>
   <div class="zoom-tool">
-    <editor-button
-      class="zoom-tool__button"
-      scheme="default"
-      size="small"
-      @click="zoomIn"
-    />
-    <p>{{ `${(currentZoom * 100).toFixed()}%` }}</p>
-    <editor-button
-      class="zoom-tool__button"
-      scheme="default"
-      size="small"
-      @click="zoomOut"
-    />
-    <editor-button
-      class="zoom-tool__button"
-      scheme="default"
-      size="small"
-      @click="zoomReset"
-    />
+    <p class="zoom-tool__label">
+      {{ 'Zoom' }}
+    </p>
+    <div class="zoom-tool__wrapper">
+      <div class="zoom-tool__zoom">
+        <editor-button
+          class="zoom-tool__button"
+          scheme="default"
+          size="small"
+          :icon-name="ICON_NAMES.zoomPlus"
+          @click="zoomIn"
+        />
+        <p class="zoom-tool__current-zoom">
+          {{ `${(currentZoom * 100).toFixed()}%` }}
+        </p>
+        <editor-button
+          class="zoom-tool__button"
+          scheme="default"
+          size="small"
+          :icon-name="ICON_NAMES.zoomMinus"
+          @click="zoomOut"
+        />
+      </div>
+
+      <editor-button
+        class="zoom-tool__button"
+        scheme="default"
+        size="small"
+        modifications="no-icon"
+        :text="'reset'"
+        @click="zoomReset"
+      />
+    </div>
   </div>
 </template>
 
@@ -27,6 +41,7 @@
 import { EditorButton } from '@/common'
 import { EditorInstanceKey } from '@/types'
 import { safeInject } from '@/helpers'
+import { ICON_NAMES } from '@/enums'
 
 const props = withDefaults(
   defineProps<{
@@ -65,27 +80,35 @@ const zoomReset = () => {
 <style lang="scss" scoped>
 .zoom-tool {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: toRem(10);
-  background-color: var(--background-primary);
-  border-radius: toRem(8);
-  padding: toRem(10);
-  border: toRem(1) dashed var(--primary-main);
+  gap: toRem(8);
+}
 
-  @include respond-to(medium) {
-    flex-direction: row;
-  }
+.zoom-tool__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  gap: toRem(10);
+}
+
+.zoom-tool__zoom {
+  display: flex;
+  align-items: center;
+  gap: toRem(10);
+}
+
+.zoom-tool__current-zoom {
+  color: var(--lib-text-primary-invert-main);
+  font-weight: 400;
+  font-size: toRem(14);
 }
 
 .zoom-tool__button {
-  aspect-ratio: 1 / 1;
+  text-transform: uppercase;
+}
 
-  --app-button-bg-hover: var(--primary-light);
-  --app-button-border-hover: var(--primary-main);
-
-  &:hover {
-    cursor: pointer;
-  }
+.zoom-tool__label {
+  @include lib-tool-label;
 }
 </style>

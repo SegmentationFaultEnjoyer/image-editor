@@ -14,6 +14,7 @@
       v-if="currentMode !== TOOL_MODS.drawing"
       :disabled-color-types="disabledColorTools"
     />
+    <zoom-tool />
     <history-tool class="image-editor-tool-kit__history" />
 
     <context-menu v-model:is-shown="contextMenuState.isShown">
@@ -63,6 +64,7 @@ import {
   ShapesTool,
   DrawingTool,
   HistoryTool,
+  ZoomTool,
 } from '@/components'
 import { safeInject } from '@/helpers'
 import { TOOL_MODS } from '@/enums'

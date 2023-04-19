@@ -5,8 +5,8 @@ import type { UseCanvasOperations, ZoomType } from '@/types'
 import {
   preserveOriginalSize,
   keepObjectInBoundaries,
-  dataUriToBlob,
   History,
+  dataUriToBlobViaFetch,
 } from '@/helpers'
 
 const DEFAULT_VIEWPORT = [1, 0, 0, 1, 0, 0]
@@ -35,7 +35,7 @@ export function useCanvasOperations(
     const dataURL = canvas.toDataURL(options)
 
     const downloadLink = document.createElement('a')
-    downloadLink.setAttribute('download', fileName)
+    downloadLink.setAttribute('download', `${fileName}.png`)
 
     downloadLink.setAttribute('href', dataURL)
 
@@ -44,7 +44,7 @@ export function useCanvasOperations(
     restoreSize()
   }
 
-  const canvasToFormData = (
+  const canvasToFormData = async (
     fileName: string,
     options?: fabric.IDataURLOptions,
   ) => {
@@ -57,12 +57,12 @@ export function useCanvasOperations(
     if (!restoreSize) return null
 
     const base64 = canvas.toDataURL(options)
-    const blob = dataUriToBlob(base64, 'image/png')
+    restoreSize()
+
+    const blob = await dataUriToBlobViaFetch(base64)
 
     const formData = new FormData()
     formData.append(fileName, blob)
-
-    restoreSize()
 
     return formData
   }
