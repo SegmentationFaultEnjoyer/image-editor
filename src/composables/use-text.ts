@@ -5,6 +5,7 @@ import {
   modifyTextSelection,
   triggerObjectModifiedEvent,
 } from '@/helpers'
+import * as FontFaceObserver from 'fontfaceobserver'
 
 export function useText(canvas: fabric.Canvas): UseText {
   const addText = (value: string, options?: fabric.ITextOptions) => {
@@ -17,7 +18,7 @@ export function useText(canvas: fabric.Canvas): UseText {
       fontWeight: 'normal',
       editable: true,
       centeredRotation: true,
-      padding: 10,
+      padding: 5,
     }
 
     const text = new fabric.IText(value, {
@@ -100,10 +101,14 @@ export function useText(canvas: fabric.Canvas): UseText {
     canvas.renderAll()
   }
 
-  const changeFont = (font: string, object?: fabric.IText) => {
+  const changeFont = async (font: string, object?: fabric.IText) => {
     const activeObject = object ?? canvas.getActiveObject()
 
     if (!activeObject || !(activeObject instanceof fabric.IText)) return
+
+    const fontFace = new FontFaceObserver(font)
+
+    await fontFace.load()
 
     modifyTextSelection(activeObject, 'fontFamily', font, font)
 

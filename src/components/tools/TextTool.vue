@@ -69,11 +69,18 @@ import { EditorInstanceKey } from '@/types'
 import { ICON_NAMES } from '@/enums'
 
 enum Fonts {
-  arial = 'Arial',
-  timesNewRoman = 'Times New Roman',
-  courierNew = 'Courier New',
-  verdana = 'Verdana',
+  ysabeau = 'Ysabeau',
+  poltawskiNowy = 'Poltawski Nowy',
+  inter = 'Inter',
+  robotoMono = 'Roboto Mono',
+  playfairDisplay = 'Playfair Display',
+  sigmar = 'Sigmar',
+  dancingScript = 'Dancing Script',
   pacifico = 'Pacifico',
+  shadowsIntoLight = 'Shadows Into Light',
+  frankRuhlLibre = 'Frank Ruhl Libre',
+  pressStart2p = 'Press Start 2P',
+  specialElite = 'Special Elite',
 }
 
 const {
@@ -92,30 +99,12 @@ const DEFAULT_FONT_SIZE = 24
 const FONT_SIZE_STEP = 2
 const FONT_SIZES_START = 10
 
-const fonts = [
-  {
-    label: 'Arial',
-    value: Fonts.arial,
-  },
-  {
-    label: 'Times New Roman',
-    value: Fonts.timesNewRoman,
-  },
-  {
-    label: 'Courier New',
-    value: Fonts.courierNew,
-  },
-  {
-    label: 'Verdana',
-    value: Fonts.verdana,
-  },
-  {
-    label: 'Pacifico',
-    value: Fonts.pacifico,
-  },
-]
+const fonts = Object.values(Fonts).map(el => ({
+  label: el,
+  value: el,
+}))
 
-const currentFont = ref<Fonts>(Fonts.arial)
+const currentFont = ref<Fonts>(Fonts.pacifico)
 const currentFontSize = ref(DEFAULT_FONT_SIZE)
 
 const fontSizes = new Array(20).fill('').map((_, idx) => ({
