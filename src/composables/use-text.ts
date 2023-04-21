@@ -5,7 +5,7 @@ import {
   modifyTextSelection,
   triggerObjectModifiedEvent,
 } from '@/helpers'
-import * as FontFaceObserver from 'fontfaceobserver'
+import FontFaceObserver from 'fontfaceobserver'
 
 export function useText(canvas: fabric.Canvas): UseText {
   const addText = (value: string, options?: fabric.ITextOptions) => {
@@ -101,20 +101,22 @@ export function useText(canvas: fabric.Canvas): UseText {
     canvas.renderAll()
   }
 
-  const changeFont = async (font: string, object?: fabric.IText) => {
+  const changeFont = (font: string, object?: fabric.IText) => {
     const activeObject = object ?? canvas.getActiveObject()
 
     if (!activeObject || !(activeObject instanceof fabric.IText)) return
 
     const fontFace = new FontFaceObserver(font)
 
-    await fontFace.load()
+    // using async await is causing visual bugs for some reasons
+    // eslint-disable-next-line
+    fontFace.load().then(() => {
+      modifyTextSelection(activeObject, 'fontFamily', font, font)
 
-    modifyTextSelection(activeObject, 'fontFamily', font, font)
+      triggerObjectModifiedEvent(canvas, activeObject)
 
-    triggerObjectModifiedEvent(canvas, activeObject)
-
-    canvas.renderAll()
+      canvas.renderAll()
+    })
   }
 
   const changeFontSize = (size: number, object?: fabric.IText) => {
