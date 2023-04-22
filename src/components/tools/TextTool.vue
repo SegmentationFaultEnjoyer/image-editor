@@ -51,6 +51,7 @@
       </div>
       <editor-button
         size="x-small"
+        class="text-tool__add-btn"
         :icon-name="ICON_NAMES.plus"
         @click="addTextHandler"
       />
@@ -183,5 +184,9 @@ watch(currentFontSize, () => {
     border-radius: 0;
     border-right: none;
   }
+}
+
+.text-tool__add-btn {
+  background-color: var(--lib-primary-dark);
 }
 </style>

@@ -9,6 +9,7 @@
           class="zoom-tool__button"
           scheme="default"
           size="small"
+          :disabled="currentZoom >= MAX_ZOOM"
           :icon-name="ICON_NAMES.zoomPlus"
           @click="zoomIn"
         />
@@ -19,6 +20,7 @@
           class="zoom-tool__button"
           scheme="default"
           size="small"
+          :disabled="currentZoom <= MIN_ZOOM"
           :icon-name="ICON_NAMES.zoomMinus"
           @click="zoomOut"
         />
@@ -43,6 +45,9 @@ import { EditorInstanceKey } from '@/types'
 import { safeInject } from '@/helpers'
 import { ICON_NAMES } from '@/enums'
 
+const MAX_ZOOM = 3
+const MIN_ZOOM = 1
+
 const props = withDefaults(
   defineProps<{
     zoomStep?: number
@@ -57,7 +62,7 @@ const {
 } = safeInject(EditorInstanceKey)
 
 const zoomIn = () => {
-  if (currentZoom.value > 3) return
+  if (currentZoom.value > MAX_ZOOM) return
 
   const newZoom = parseFloat((currentZoom.value + props.zoomStep).toFixed(1))
 

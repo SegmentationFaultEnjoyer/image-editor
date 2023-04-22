@@ -84,6 +84,9 @@ export function setGuideLineIntersectionListener(canvas: fabric.Canvas) {
     if (!event.target) return
 
     const activeObject = event.target
+
+    if (activeObject instanceof fabric.IText) return
+
     hideLines(guideLines)
 
     const intersectingLines = getIntersectingLines(activeObject, guideLines)

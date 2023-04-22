@@ -1,6 +1,7 @@
 import type { fabric } from 'fabric'
 
 const NON_DEFAULT_PROPS = ['padding']
+const MAX_HISTORY_CAPACITY = 25
 
 class Memento {
   private readonly state: string
@@ -85,6 +86,9 @@ export class History {
     // cutting off redo history branch after user manually applies changes
     if (this.currentIdx !== -1)
       this.history = this.history.slice(0, this.currentIdx + 1)
+
+    if (this.history.length > MAX_HISTORY_CAPACITY)
+      this.history = [this.history.at(-1)!]
 
     this.history.push(memento)
     this.currentIdx = this.history.length - 1
