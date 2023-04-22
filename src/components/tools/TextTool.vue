@@ -65,7 +65,7 @@ import { ref, watch } from 'vue'
 import { SelectField } from '@/fields'
 import { EditorButton } from '@/common'
 import { safeInject } from '@/helpers'
-import { EditorInstanceKey } from '@/types'
+import { EditorInstanceKey, DefaultParamsKey } from '@/types'
 import { ICON_NAMES } from '@/enums'
 
 enum Fonts {
@@ -94,6 +94,8 @@ const {
   },
 } = safeInject(EditorInstanceKey)
 
+const { params } = safeInject(DefaultParamsKey)
+
 const DEFAULT_TEXT = 'Your unique signature'
 const DEFAULT_FONT_SIZE = 24
 const FONT_SIZE_STEP = 2
@@ -116,6 +118,9 @@ const addTextHandler = () => {
   addText(DEFAULT_TEXT, {
     fontSize: currentFontSize.value,
     fontFamily: currentFont.value,
+    fill: params.value.fill,
+    stroke: params.value.strokeColor as string,
+    strokeWidth: params.value.strokeWidth,
   })
 }
 

@@ -64,6 +64,7 @@ export function useImageEditor(
     copyObjectToClipboard,
     pasteObjectFromClipboard,
     deleteObjects,
+    initHistory,
     undo,
     redo,
     discardActiveObject,
@@ -131,6 +132,11 @@ export function useImageEditor(
           await setBackgroundImage(imageUrl, customOptions)
           adjustCanvasDimensions()
           setCanvasListeners()
+
+          setTimeout(() => {
+            initHistory()
+          }, 100)
+
           resolve()
         } catch (error) {
           reject(error)
@@ -146,7 +152,7 @@ export function useImageEditor(
     return new Promise((resolve, reject) => {
       try {
         fabric.Image.fromURL(
-          imageUrl,
+          imageUrl + '?fuck-you-cors-policy',
           (image: fabric.Image) => {
             if (
               !image.width ||
@@ -245,6 +251,7 @@ export function useImageEditor(
     pasteObjectFromClipboard,
     deleteObjects,
     discardActiveObject,
+    initHistory,
     undo,
     redo,
 

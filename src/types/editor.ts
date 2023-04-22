@@ -6,6 +6,13 @@ export type AlignType = 'center' | 'left' | 'right'
 export type FabricColor = string | fabric.Pattern | fabric.Gradient
 export type FabricStyle = FabricColor | number
 
+export type DefaultObjectParams = {
+  fill: FabricColor
+  background: FabricColor
+  strokeWidth: number
+  strokeColor: FabricColor
+}
+
 export enum BRUSHES {
   pencil = 'pencil',
   spray = 'spray',
@@ -68,6 +75,7 @@ export interface UseCanvasOperations {
   zoom: (zoomType: ZoomType, scaleFactor?: number) => void
   undo: () => void
   redo: () => void
+  initHistory: () => void
   currentZoom: Ref<number>
 }
 

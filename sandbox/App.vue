@@ -28,7 +28,7 @@ import { ref } from 'vue'
 
 const title = 'Purchasing'
 const testImage =
-  'https://tokend-nftbooks.s3.us-east-2.amazonaws.com/f6391766-11b1-48cf-aa55-811948c26bd9.png'
+  'https://tokend-nftbooks.s3.us-east-2.amazonaws.com/e50e35c3-224c-40df-9fe4-0eb1477e9122.jpeg'
 const editorInstance = ref<{
   editorInstance: UseImageEditor | null
 }>()

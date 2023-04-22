@@ -32,7 +32,7 @@ import { ref, watch } from 'vue'
 import { ColorField, RangeField } from '@/fields'
 import { debounce } from 'lodash-es'
 import { safeInject } from '@/helpers'
-import { EditorInstanceKey } from '@/types'
+import { EditorInstanceKey, DefaultParamsKey } from '@/types'
 
 type ColorType = 'fill' | 'background' | 'stroke'
 
@@ -44,27 +44,29 @@ const isColorTypeDisabled = (type: ColorType) => {
   return props.disabledColorTypes && props.disabledColorTypes.includes(type)
 }
 
-const DEFAULT_FILL_COLOR = '#000000'
-const DEFAULT_BACKGROUND_COLOR = '#000000'
-const DEFAULT_STROKE_COLOR = '#00000'
-const DEFAULT_STROKE_WIDTH = 2
-
 const MIN_STROKE_WIDTH = 0
 const MAX_STROKE_WIDTH = 20
-
-const fill = ref(DEFAULT_FILL_COLOR)
-const background = ref(DEFAULT_BACKGROUND_COLOR)
-const stroke = ref(DEFAULT_STROKE_COLOR)
-const strokeWidth = ref(DEFAULT_STROKE_WIDTH)
 
 const {
   instance: { setBackgroundColor, setColor, setStroke },
 } = safeInject(EditorInstanceKey)
 
+const { params } = safeInject(DefaultParamsKey)
+
+const fill = ref(params.value.fill as string)
+const background = ref(params.value.background as string)
+const stroke = ref(params.value.strokeColor as string)
+const strokeWidth = ref(params.value.strokeWidth)
+
 watch(
   fill,
   debounce(() => {
     setColor(fill.value)
+
+    params.value = {
+      ...params.value,
+      fill: fill.value,
+    }
   }, 100),
 )
 
@@ -72,6 +74,11 @@ watch(
   background,
   debounce(() => {
     setBackgroundColor(background.value)
+
+    params.value = {
+      ...params.value,
+      background: background.value,
+    }
   }, 100),
 )
 
@@ -81,6 +88,11 @@ watch(
     setStroke({
       stroke: stroke.value,
     })
+
+    params.value = {
+      ...params.value,
+      strokeColor: stroke.value,
+    }
   }, 100),
 )
 
@@ -88,6 +100,11 @@ watch(strokeWidth, () => {
   setStroke({
     strokeWidth: strokeWidth.value,
   })
+
+  params.value = {
+    ...params.value,
+    strokeWidth: strokeWidth.value,
+  }
 })
 </script>
 

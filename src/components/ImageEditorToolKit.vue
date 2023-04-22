@@ -51,11 +51,15 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, ref, computed } from 'vue'
+import { onBeforeUnmount, ref, computed, provide } from 'vue'
 
 import { ContextMenu } from '@/common'
 
-import { EditorInstanceKey } from '@/types'
+import {
+  EditorInstanceKey,
+  type DefaultObjectParams,
+  DefaultParamsKey,
+} from '@/types'
 import {
   ToolsSwitcher,
   LayeringTool,
@@ -68,6 +72,17 @@ import {
 } from '@/components'
 import { safeInject } from '@/helpers'
 import { TOOL_MODS } from '@/enums'
+
+const defaultParams = ref<DefaultObjectParams>({
+  fill: '#000000',
+  background: '#77f',
+  strokeColor: '#000000',
+  strokeWidth: 0,
+})
+
+provide(DefaultParamsKey, {
+  params: defaultParams,
+})
 
 const currentMode = ref<TOOL_MODS>(TOOL_MODS.text)
 
@@ -171,6 +186,7 @@ onBeforeUnmount(() => {
   transition: 0.2s ease-in-out;
   transition-property: background-color;
   background-color: var(--lib-background-primary);
+  color: var(--lib-text-primary-main);
   padding: toRem(10) toRem(15);
   font-weight: 400;
   font-size: toRem(15);

@@ -8,18 +8,18 @@
         modifications="first-in-group"
         icon-size="large"
         :icon-name="ICON_NAMES.rectangle"
-        @click="addRectangle()"
+        @click="addShape(addRectangle)"
       />
       <editor-button
         icon-size="large"
         :icon-name="ICON_NAMES.circle"
-        @click="addCircle()"
+        @click="addShape(addCircle)"
       />
       <editor-button
         icon-size="large"
         modifications="last-in-group"
         :icon-name="ICON_NAMES.triangle"
-        @click="addTriangle()"
+        @click="addShape(addTriangle)"
       />
     </div>
   </section>
@@ -29,11 +29,22 @@
 import { safeInject } from '@/helpers'
 import { EditorButton } from '@/common'
 import { ICON_NAMES } from '@/enums'
-import { EditorInstanceKey } from '@/types'
+import { EditorInstanceKey, DefaultParamsKey } from '@/types'
+import type { fabric } from 'fabric'
 
 const {
   instance: { addCircle, addRectangle, addTriangle },
 } = safeInject(EditorInstanceKey)
+
+const { params } = safeInject(DefaultParamsKey)
+
+const addShape = (addFunc: (options?: fabric.IObjectOptions) => void) => {
+  addFunc({
+    fill: params.value.fill,
+    stroke: params.value.strokeColor as string,
+    strokeWidth: params.value.strokeWidth,
+  })
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-import type { fabric } from 'fabric'
+import { fabric } from 'fabric'
 import type { Ref } from 'vue'
 import { useGuideLines } from '@/composables'
 
@@ -47,6 +47,13 @@ export function setCreationListener(
 ) {
   canvas.on('object:added', event => {
     if (!event.target || !event.target.visible) return
+
+    // no need to highlight after drawing
+    if (
+      event.target instanceof fabric.Path ||
+      event.target instanceof fabric.Group
+    )
+      return
 
     canvas.setActiveObject(event.target)
     activeObject.value = event.target

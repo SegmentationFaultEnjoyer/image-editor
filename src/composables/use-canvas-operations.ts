@@ -20,7 +20,7 @@ export function useCanvasOperations(
   const currentZoom = ref(DEFAULT_ZOOM)
   let clipboard: fabric.Object | null = null
 
-  const history = new History(canvas)
+  let history: History | null = null
 
   const download = (fileName: string, options?: fabric.IDataURLOptions) => {
     if (!canvas) return
@@ -107,9 +107,19 @@ export function useCanvasOperations(
     clipboard.clone((cloned: fabric.Object) => {
       if (!cloned.left || !cloned.top) return
 
+      const isXOutOfBoundary =
+        cloned.left + CLONED_OBJECT_OFFSET > canvas.getWidth() - cloned.width!
+
+      const isYOutOfBoundary =
+        cloned.top + CLONED_OBJECT_OFFSET > canvas.getHeight() - cloned.height!
+
       cloned.set({
-        left: cloned.left + CLONED_OBJECT_OFFSET,
-        top: cloned.top + CLONED_OBJECT_OFFSET,
+        left: !isXOutOfBoundary
+          ? cloned.left + CLONED_OBJECT_OFFSET
+          : canvas.getWidth() / 2,
+        top: !isYOutOfBoundary
+          ? cloned.top + CLONED_OBJECT_OFFSET
+          : canvas.getHeight() / 2,
         evented: true,
       })
 
@@ -160,11 +170,19 @@ export function useCanvasOperations(
   }
 
   const undo = () => {
+    if (!history) return
+
     history.undo()
   }
 
   const redo = () => {
+    if (!history) return
+
     history.redo()
+  }
+
+  const initHistory = () => {
+    history = new History(canvas)
   }
 
   return {
@@ -178,6 +196,7 @@ export function useCanvasOperations(
     deleteObjects,
     discardActiveObject,
 
+    initHistory,
     undo,
     redo,
   }
