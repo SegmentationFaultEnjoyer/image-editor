@@ -110,6 +110,7 @@ onMounted(() => {
   border: toRem(1) solid var(--lib-primary-main);
   padding: toRem(14) toRem(12);
   background-color: var(--lib-editor-background);
+  z-index: 1;
 }
 
 .range-field__label {

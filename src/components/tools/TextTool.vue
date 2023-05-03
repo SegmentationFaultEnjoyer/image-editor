@@ -3,6 +3,15 @@
     <p class="text-tool__label">
       {{ 'Text' }}
     </p>
+    <editor-button
+      class="text-tool__add-btn"
+      size="full"
+      icon-size="large"
+      text-size="x-medium"
+      :text="'Add new text layer'"
+      :icon-name="ICON_NAMES.plus"
+      @click="addTextHandler"
+    />
     <div class="text-tool__selections">
       <select-field
         v-model="currentFont"
@@ -49,12 +58,6 @@
           @click="changeTextAlign('right')"
         />
       </div>
-      <editor-button
-        size="x-small"
-        class="text-tool__add-btn"
-        :icon-name="ICON_NAMES.plus"
-        @click="addTextHandler"
-      />
     </div>
   </section>
 </template>
@@ -187,6 +190,6 @@ watch(currentFontSize, () => {
 }
 
 .text-tool__add-btn {
-  background-color: var(--lib-primary-dark);
+  border: toRem(1) solid var(--lib-primary-dark);
 }
 </style>

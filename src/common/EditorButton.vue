@@ -1,11 +1,10 @@
 <template>
   <button v-bind="$attrs" :class="buttonClasses" :type="type">
-    <icon
-      v-if="modifications !== 'no-icon'"
-      :class="iconClasses"
-      :name="iconName"
-    />
-    <span v-if="text" class="editor-button__text">
+    <div v-if="modifications !== 'no-icon'" class="editor-button__icon-wrapper">
+      <icon :class="iconClasses" :name="iconName" />
+    </div>
+
+    <span v-if="text" :class="textClasses">
       {{ text }}
     </span>
   </button>
@@ -16,8 +15,9 @@ import { useAttrs, computed } from 'vue'
 import { Icon } from '@/common'
 import { ICON_NAMES } from '@/enums'
 
-type Size = 'x-small' | 'small' | 'x-medium' | 'medium' | 'large'
+type Size = 'x-small' | 'small' | 'x-medium' | 'medium' | 'large' | 'full'
 type IconSize = 'small' | 'medium' | 'large'
+type TextSize = 'medium' | 'x-medium'
 type Modification = 'first-in-group' | 'last-in-group' | 'default' | 'no-icon'
 type ButtonType = 'submit' | 'reset' | 'button'
 type Scheme = 'reset' | 'default'
@@ -27,6 +27,7 @@ const props = withDefaults(
     iconName?: ICON_NAMES
     size?: Size
     text?: string
+    textSize?: TextSize
     iconSize?: IconSize
     scheme?: Scheme
     modifications?: Modification
@@ -39,6 +40,7 @@ const props = withDefaults(
     modifications: 'default',
     type: 'button',
     text: '',
+    textSize: 'medium',
     scheme: 'default',
   },
 )
@@ -52,6 +54,11 @@ const isDisabled = computed((): boolean =>
 const iconClasses = computed(() => [
   'editor-button__icon',
   `editor-button__icon--${props.iconSize}`,
+])
+
+const textClasses = computed(() => [
+  'editor-button__text',
+  `editor-button__text--${props.textSize}`,
 ])
 
 const buttonClasses = computed(() =>
@@ -70,8 +77,11 @@ const buttonClasses = computed(() =>
   border-radius: toRem(8);
   background-color: var(--lib-editor-background);
   border: toRem(1) solid var(--lib-border-primary-main);
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: toRem(40);
+  gap: toRem(10);
   transition: 0.2s ease-in-out;
   transition-property: background-color;
 
@@ -92,6 +102,10 @@ const buttonClasses = computed(() =>
     opacity: 0.5;
   }
 
+  &--full {
+    width: 100%;
+  }
+
   &--medium {
     width: toRem(70);
     height: toRem(48);
@@ -99,17 +113,14 @@ const buttonClasses = computed(() =>
 
   &--x-medium {
     width: toRem(59);
-    height: toRem(40);
   }
 
   &--small {
     width: toRem(45);
-    height: toRem(40);
   }
 
   &--x-small {
     width: toRem(36);
-    height: toRem(40);
   }
 
   &--first-in-group {
@@ -144,6 +155,19 @@ const buttonClasses = computed(() =>
   .editor-button--reset & {
     color: var(--lib-error-main);
   }
+
+  &--medium {
+    font-size: toRem(12);
+  }
+
+  &--x-medium {
+    font-size: toRem(14);
+  }
+}
+
+.editor-button__icon-wrapper {
+  display: grid;
+  place-content: center;
 }
 
 .editor-button__icon {
